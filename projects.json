@@ -84,6 +84,23 @@
     "featured": true
   },
   {
+    "id": "mini-football",
+    "title": "Mini Football",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A top-down arcade soccer game with goalkeepers, for two players on one keyboard or one against the computer. Needs a keyboard.",
+    "builtWith": [
+      "AI-generated",
+      "HTML5 Canvas",
+      "JavaScript"
+    ],
+    "url": "/p/mini-football/",
+    "color": "#2F8F46",
+    "glyph": "⚽",
+    "notes": "Generated with AI as a single HTML file with no dependencies. The pitch is drawn on a canvas with real ball physics: tap to pass, hold to power up a shot, and dribble by pushing the ball. It has CPU goalkeepers and a CPU striker for solo play, a match clock with golden goal on a tie, and sound effects synthesized in the browser.",
+    "featured": true
+  },
+  {
     "id": "knicks-central",
     "title": "Knicks Central",
     "kind": "Website",
@@ -98,8 +115,7 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
-    "featured": true
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
   },
   {
     "id": "ashar-chatbot",
@@ -181,8 +197,7 @@
     "url": "/p/french-flashcards/",
     "color": "#E4572E",
     "glyph": "F",
-    "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too.",
-    "featured": true
+    "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too."
   },
   {
     "id": "habitarie",
