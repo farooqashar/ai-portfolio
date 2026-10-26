@@ -67,6 +67,23 @@
     "featured": true
   },
   {
+    "id": "ai-startup-atlas",
+    "title": "Atlas: AI Startup Directory",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A searchable directory of 227 AI startups across 12 fields, from frontier labs and chipmakers to humanoid robots and AI-designed drugs.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "JavaScript"
+    ],
+    "url": "/p/ai-startup-atlas/",
+    "color": "#6D4AFF",
+    "glyph": "A",
+    "notes": "Generated with AI as a two-file static site: the page and a data file of 227 companies with founding year, HQ, region and tags. Search by name, tag or city, filter by field and region, sort by age, bookmark favorites for the session, and open any company for details. Press / to jump to search.",
+    "featured": true
+  },
+  {
     "id": "knicks-central",
     "title": "Knicks Central",
     "kind": "Website",
@@ -81,7 +98,8 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
+    "featured": true
   },
   {
     "id": "ashar-chatbot",
@@ -163,7 +181,8 @@
     "url": "/p/french-flashcards/",
     "color": "#E4572E",
     "glyph": "F",
-    "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too."
+    "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too.",
+    "featured": true
   },
   {
     "id": "habitarie",
