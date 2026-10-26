@@ -1,21 +1,5 @@
 [
   {
-    "id": "boston-big-e",
-    "title": "Boston + Big E 2026",
-    "kind": "Website",
-    "year": 2026,
-    "summary": "A recap site for a weekend trip to Boston and the Big E fair: the route, the stops and the photos, in one scrollable page.",
-    "builtWith": [
-      "Claude",
-      "Cloudflare Workers"
-    ],
-    "url": "https://bostonbige2026.asharfarooq.workers.dev",
-    "color": "#E4572E",
-    "glyph": "B",
-    "featured": true,
-    "notes": "I describe the trip, drop in the stops and photos, and have AI generate the page. Deployed as a Cloudflare Worker so each trip gets its own link."
-  },
-  {
     "id": "ashar-travel",
     "title": "Ashar Travel",
     "kind": "Website",
@@ -31,6 +15,23 @@
     "glyph": "T",
     "featured": true,
     "notes": "After a trip I tell AI which countries to add, and it updates the data and redeploys. The October 2026 Eastern Europe trip added five countries in one pass."
+  },
+  {
+    "id": "slack-backup",
+    "title": "Slack backup to Drive",
+    "kind": "Automation",
+    "year": 2026,
+    "featured": true,
+    "summary": "Every week, new messages from my Slack workspace, threads included, are saved to a fresh Google Doc. API keys get redacted along the way.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Slack",
+      "Google Drive"
+    ],
+    "schedule": "Weekly",
+    "color": "#4A1942",
+    "glyph": "B",
+    "notes": "The design is append-only: each run writes one new doc covering only messages since the last run, and the doc's title holds the cutoff timestamp, so a missed week loses nothing. After uploading, Claude checks the doc against a manifest of every message it collected and discards its own doc if anything is missing. I moved to this after an earlier version that rewrote one big doc silently corrupted it."
   },
   {
     "id": "celebrations",
@@ -55,19 +56,20 @@
     "summary": "A weekly digest of 15 new food spots, worldwide, around New York and Long Island, and near the office, each with a Google Maps link.",
     "builtWith": [
       "Claude scheduled tasks",
-      "Web search"
+      "Web search",
+      "Google Maps"
     ],
     "schedule": "Weekly",
     "color": "#C1292E",
     "glyph": "F",
-    "notes": "Claude searches for newly opened places each week, filters out ones it has already sent, and delivers a short list with map links I can save in one tap."
+    "notes": "Claude researches newly opened or buzzing spots, confirms each one is open and checks halal status, then rotates the focus by region each week so the list stays fresh. Every pick comes with a Google Maps link I can save in one tap."
   },
   {
     "id": "nyc-events",
     "title": "NYC AI events digest",
     "kind": "Automation",
     "year": 2026,
-    "summary": "A weekly email of free AI and tech events in New York, plus the social Luma and Partiful invites worth going to.",
+    "summary": "A weekly email of free AI and tech events in New York over the next three weeks, plus the Luma and Partiful invites in my inbox and a few good public social picks.",
     "builtWith": [
       "Claude scheduled tasks",
       "Gmail",
@@ -76,7 +78,130 @@
     "schedule": "Weekly",
     "color": "#3A2FE0",
     "glyph": "E",
-    "notes": "Claude scans event listings, keeps the free and relevant ones, and emails me a digest sorted by date."
+    "notes": "Claude checks Luma, Meetup, Eventbrite and other listings, keeps only free, in-person NYC events with confirmed dates, pulls my invites from Gmail, and skips anything it already sent last week. It only reads and sends one email; it never RSVPs."
+  },
+  {
+    "id": "gmail-labels",
+    "title": "Inbox labeling",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Each night, yesterday's new email gets sorted into labels like Promotions, Newsletters, Career and Finance, based on who sent it.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Gmail"
+    ],
+    "schedule": "Every day",
+    "color": "#D1495B",
+    "glyph": "L",
+    "notes": "Claude only labels; it never archives, deletes or marks anything read. Senders that don't clearly fit a category stay unlabeled and show up in the run summary, so I can tune the categories over time."
+  },
+  {
+    "id": "drive-tidy",
+    "title": "Google Drive tidy-up",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "A weekly pass that finds 5 to 10 misplaced or badly named files in my Drive and proposes where they should go.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Google Drive"
+    ],
+    "schedule": "Weekly",
+    "color": "#00798C",
+    "glyph": "D",
+    "notes": "It works through the catch-all folders first and proposes moves and renames as a numbered list. Nothing moves until I reply with which items to approve, then Claude carries them out in the same session."
+  },
+  {
+    "id": "obsidian-cleanup",
+    "title": "Obsidian vault cleanup",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every week, new web clippings in my Obsidian vault get filed into topic folders, renamed, titled and tagged.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Obsidian",
+      "Bash"
+    ],
+    "schedule": "Weekly",
+    "color": "#7B5EA7",
+    "glyph": "O",
+    "notes": "Claude works on the vault on my Mac using a fixed set of topic folders and a shared tag vocabulary. Moves never overwrite anything, duplicates are only flagged, and every run leaves a dated log in the vault."
+  },
+  {
+    "id": "screenshot-renamer",
+    "title": "Screenshot renamer",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Untitled work screenshots get descriptive names like 2026-09-11_slack-devbot-pr-reviewer-roster.png, based on what's actually in them.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Vision",
+      "Bash"
+    ],
+    "schedule": "Weekly",
+    "color": "#EDAE49",
+    "glyph": "R",
+    "notes": "Claude opens each screenshot to see what's on screen, then renames it to match the folder's existing naming style. Renames go through a safe placeholder first, since macOS screenshot names hide a special space character that breaks naive scripts."
+  },
+  {
+    "id": "bookmark-review",
+    "title": "Bookmark review",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Once a month, a review of my Chrome bookmarks that finds duplicates and suggests a cleaner folder structure.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Python"
+    ],
+    "schedule": "Monthly",
+    "color": "#3D5A80",
+    "glyph": "K",
+    "notes": "If my latest bookmarks export is recent, Claude parses it with a script, normalizes URLs to catch near-duplicates, and proposes specific restructures. If the export is stale, it just reminds me to export. It never changes anything itself."
+  },
+  {
+    "id": "granola-backup",
+    "title": "Meeting notes backup",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "On the first of each month, last month's Granola meeting notes, summaries and transcripts are copied into Google Drive, one doc per meeting.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Granola",
+      "Google Drive"
+    ],
+    "schedule": "Monthly",
+    "color": "#2A9D8F",
+    "glyph": "G",
+    "notes": "Each month gets its own folder, and Claude skips meetings already saved in the previous month's backup since the 30-day windows overlap."
+  },
+  {
+    "id": "recruiter-drafts",
+    "title": "Recruiter reply drafts",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Polite reply drafts for recruiter emails, waiting in Gmail for me to review and send.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Gmail"
+    ],
+    "schedule": "Every day",
+    "color": "#6D6875",
+    "glyph": "R",
+    "notes": "Claude finds recruiter outreach, skips threads I've already answered or drafted, and writes a reply from my template. It only creates drafts, never sends. LinkedIn messages it can't reply to get listed separately."
+  },
+  {
+    "id": "mentions",
+    "title": "Web mentions check",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "A weekly scan of news and the web for new mentions of me, summarized with links.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Web search"
+    ],
+    "schedule": "Weekly",
+    "color": "#E76F51",
+    "glyph": "M",
+    "notes": "Claude searches the past week, confirms each result is actually about me rather than someone with the same name, and puts uncertain ones in a separate section. If nothing turned up, the report is one line."
   },
   {
     "id": "slack-calendar-sync",
