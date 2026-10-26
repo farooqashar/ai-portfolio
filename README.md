@@ -2,7 +2,23 @@
 
 A gallery of the websites and automations I build with AI. Plain HTML, CSS and JavaScript, no build step.
 
-## Add a project
+## Host a frontend site here
+
+Simple AI-generated sites (plain HTML, CSS and JavaScript) live in `p/<slug>/` and are served at `ai.asharfarooq.xyz/p/<slug>/`. One command creates the folder and the gallery entry:
+
+```sh
+# Start from a blank starter page
+node scripts/new-site.mjs trip-recap "Trip recap" "One-line summary"
+
+# Or bring in an HTML file or a folder with an index.html
+node scripts/new-site.mjs trip-recap "Trip recap" "One-line summary" --from ~/Downloads/recap.html
+```
+
+Then fill in `notes` and `builtWith` for that entry in `projects.json`, commit and push.
+
+Sites with a build step or npm dependencies get their own repo and Vercel project; add those as an outside link below. See `p/README.md` for the rules a hosted site needs to follow.
+
+## Add a project hosted elsewhere
 
 1. Deploy the project wherever it runs (Vercel, Cloudflare, a Claude artifact link).
 2. Add an entry to `projects.json`:

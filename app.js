@@ -16,7 +16,13 @@
   }
 
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
+  const isLocal = (u) => typeof u === "string" && u.startsWith("/");
+  const host = (u) => {
+    try {
+      const url = new URL(u, location.href);
+      return isLocal(u) ? (location.host || "") + url.pathname.replace(/\/$/, "") : url.hostname.replace(/^www\./, "");
+    } catch { return ""; }
+  };
 
   // Filters, with counts
   const kinds = ["All", ...new Set(projects.map((p) => p.kind))];
@@ -72,7 +78,9 @@
     document.getElementById("detail-notes").textContent = p.notes || "";
     document.getElementById("detail-tools").innerHTML = (p.builtWith || []).map((t) => `<li>${esc(t)}</li>`).join("");
     const actions = [];
-    if (p.url) actions.push(`<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">Visit site</a>`);
+    if (p.url) actions.push(isLocal(p.url)
+      ? `<a class="btn primary" href="${esc(p.url)}">Visit site</a>`
+      : `<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">Visit site</a>`);
     if (p.repo) actions.push(`<a class="btn" href="${esc(p.repo)}" target="_blank" rel="noopener">View code</a>`);
     document.getElementById("detail-actions").innerHTML = actions.join("");
     dialog.showModal();
