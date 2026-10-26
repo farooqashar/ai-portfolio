@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Made with AI by Ashar Farooq</title>
+  <meta name="description" content="Websites and automations Ashar Farooq has built with AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233A2FE0'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='36' text-anchor='middle' fill='%23FFD23F'%3EA%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="intro">
+    <p class="byline"><a href="https://ashar.vercel.app">Ashar Farooq</a></p>
+    <h1 class="headline">Things I make<br>with AI.</h1>
+    <p class="lede">Websites, tools and automations I've built by working with AI. Open any of them to see what it does and how it came together.</p>
+  </header>
+
+  <main>
+    <nav class="filters" aria-label="Filter projects">
+      <div role="group" id="filter-group"></div>
+    </nav>
+
+    <ul class="grid" id="grid" aria-live="polite"></ul>
+    <p class="empty" id="empty" hidden>Nothing here yet. Pick another filter to see more projects.</p>
+  </main>
+
+  <footer class="foot">
+    <p>Built with Claude. New projects get added as I make them.</p>
+  </footer>
+
+  <dialog id="detail" aria-labelledby="detail-title">
+    <article class="detail">
+      <div class="detail-cover" id="detail-cover" aria-hidden="true"></div>
+      <div class="detail-body">
+        <p class="detail-meta" id="detail-meta"></p>
+        <h2 id="detail-title"></h2>
+        <p id="detail-summary" class="detail-summary"></p>
+        <h3>How it's built</h3>
+        <p id="detail-notes"></p>
+        <ul class="tools" id="detail-tools"></ul>
+        <div class="detail-actions" id="detail-actions"></div>
+      </div>
+      <button class="close" id="detail-close" aria-label="Close">×</button>
+    </article>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "boston-big-e",
+    "title": "Boston + Big E 2026",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A recap site for a weekend trip to Boston and the Big E fair: the route, the stops and the photos, in one scrollable page.",
+    "builtWith": [
+      "Claude",
+      "Cloudflare Workers"
+    ],
+    "url": "https://bostonbige2026.asharfarooq.workers.dev",
+    "color": "#E4572E",
+    "glyph": "B",
+    "featured": true,
+    "notes": "I describe the trip, drop in the stops and photos, and have AI generate the page. Deployed as a Cloudflare Worker so each trip gets its own link."
+  },
+  {
+    "id": "ashar-travel",
+    "title": "Ashar Travel",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "My travel site, with a running map and list of every country I've visited. Updated after each trip.",
+    "builtWith": [
+      "Claude",
+      "Vercel"
+    ],
+    "url": "https://ashar-travel.vercel.app",
+    "repo": "https://github.com/farooqashar/ashar-travel",
+    "color": "#1B998B",
+    "glyph": "T",
+    "featured": true,
+    "notes": "After a trip I tell AI which countries to add, and it updates the data and redeploys. The October 2026 Eastern Europe trip added five countries in one pass."
+  },
+  {
+    "id": "celebrations",
+    "title": "Daily celebrations post",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every morning, a Slack post lists the day's national and informal days, like National Pancake Day, so the team has something fun to start with.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Slack"
+    ],
+    "schedule": "Every day",
+    "color": "#F2B134",
+    "glyph": "C",
+    "notes": "A scheduled Claude task looks up today's observances, picks the good ones, and posts a short formatted message to a Slack channel."
+  },
+  {
+    "id": "food-finds",
+    "title": "Food Finds",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "A weekly digest of 15 new food spots, worldwide, around New York and Long Island, and near the office, each with a Google Maps link.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Web search"
+    ],
+    "schedule": "Weekly",
+    "color": "#C1292E",
+    "glyph": "F",
+    "notes": "Claude searches for newly opened places each week, filters out ones it has already sent, and delivers a short list with map links I can save in one tap."
+  },
+  {
+    "id": "nyc-events",
+    "title": "NYC AI events digest",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "A weekly email of free AI and tech events in New York, plus the social Luma and Partiful invites worth going to.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Gmail",
+      "Web search"
+    ],
+    "schedule": "Weekly",
+    "color": "#3A2FE0",
+    "glyph": "E",
+    "notes": "Claude scans event listings, keeps the free and relevant ones, and emails me a digest sorted by date."
+  },
+  {
+    "id": "slack-calendar-sync",
+    "title": "Slack to Calendar sync",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Turns event posts in a Slack channel into Google Calendar events, without duplicates, and updates them when the post changes.",
+    "builtWith": [
+      "Claude",
+      "Slack",
+      "Google Calendar"
+    ],
+    "color": "#5B8E7D",
+    "glyph": "S",
+    "notes": "The tricky part was making it duplicate-safe and update-aware: each event keeps a link back to its Slack message, so a re-run edits the existing event instead of adding a second one."
+  },
+  {
+    "id": "this-site",
+    "title": "This portfolio",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "The page you're on. Every project is one entry in a JSON file, so adding something new takes a minute.",
+    "builtWith": [
+      "Claude",
+      "Vercel"
+    ],
+    "repo": "https://github.com/farooqashar/ai-portfolio",
+    "color": "#15192B",
+    "glyph": "A",
+    "notes": "Plain HTML, CSS and a little JavaScript, no build step. Claude designed and wrote it; I add projects by editing projects.json and pushing.",
+    "wide": true
+  }
+]
