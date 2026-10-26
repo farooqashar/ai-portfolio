@@ -71,7 +71,6 @@
     "title": "Knicks Central",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "A Knicks game-night page with the live score, Eastern Conference standings and the team's stat leaders in one place. Demo data.",
     "builtWith": [
       "AI-generated",
@@ -152,6 +151,21 @@
     "notes": "Generated with AI around the 2026 World Cup, with sections for history, past winners and stats."
   },
   {
+    "id": "french-flashcards",
+    "title": "French Flashcards",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "Forty everyday French words on flip cards. Mark each one Got it or Again, and missed words come back a few cards later.",
+    "builtWith": [
+      "Claude",
+      "HTML"
+    ],
+    "url": "/p/french-flashcards/",
+    "color": "#E4572E",
+    "glyph": "F",
+    "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too."
+  },
+  {
     "id": "habitarie",
     "title": "Habitarie",
     "kind": "Website",
@@ -184,6 +198,66 @@
     "color": "#B5179E",
     "glyph": "P",
     "notes": "Generated with AI as a reusable template: swap in the name, date and venue and it's ready to send."
+  },
+  {
+    "id": "kb-ai-agents",
+    "title": "AI agent registry",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "Twenty-three ready-made agent definitions, from code review and debugging to research, writing and travel planning, for use as subagents.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/AI-agents",
+    "color": "#5F0F40",
+    "glyph": "A",
+    "notes": "Each agent is one Markdown file describing its role, scope and approach, with a guide on how to plug them into an AI coding tool as focused subagents."
+  },
+  {
+    "id": "kb-islam",
+    "title": "Islam knowledge base",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "A structured reference on Islam in seventeen chapters: beliefs, the five pillars, the Quran, hadith, history, law, theology, ethics, finance and culture.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/islam",
+    "color": "#0B6E4F",
+    "glyph": "I",
+    "notes": "Organized as numbered chapters with an index guide and suggested learning paths, so it reads like a course rather than a pile of notes."
+  },
+  {
+    "id": "kb-finance",
+    "title": "Finance knowledge base",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "Notes on personal finance, investing and markets, and company analysis, plus a map of authoritative sources and dated market snapshots.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/finance",
+    "color": "#1D3557",
+    "glyph": "$",
+    "notes": "Set up so AI tools can work in it: an agent guide sets the conventions, a source map says where facts should come from, and market snapshots are dated so they never pass as current."
+  },
+  {
+    "id": "kb-missing-semester",
+    "title": "Missing Semester notes",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "MIT's Missing Semester course, covering the shell, editors, version control, debugging and more, organized as context for AI tools.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/missing-cs",
+    "color": "#A4161A",
+    "glyph": "M",
+    "notes": "The 2019 and 2020 course materials gathered into one indexed repo, so an AI assistant can draw on them when I'm learning or working at the command line."
   },
   {
     "id": "celebrations",

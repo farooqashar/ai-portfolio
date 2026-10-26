@@ -46,7 +46,7 @@
     const list = projects.filter((p) => active === "All" || p.kind === active);
     empty.hidden = list.length > 0;
     grid.innerHTML = list.map((p) => {
-      const where = p.url ? host(p.url) : p.schedule ? `Runs ${p.schedule.toLowerCase()}` : p.repo ? "Source on GitHub" : "";
+      const where = p.url ? host(p.url) : p.schedule ? `Runs ${p.schedule.toLowerCase()}` : p.repo ? p.repo.replace(/^https?:\/\//, "") : "";
       const cls = active !== "All" ? "" : p.wide ? "wide" : p.featured ? "featured" : "";
       return `<li class="${cls}">
         <button class="card" type="button" data-id="${esc(p.id)}" style="--c:${esc(p.color)}">

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>French Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEF1F7;
+    --card: #FFFFFF;
+    --ink: #16244A;
+    --muted: #5E6A86;
+    --blue: #2B4BB8;
+    --rouge: #C8323F;
+    --line: #D5DBE8;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1730; --card: #18244A; --ink: #EEF1F7; --muted: #A3AECB;
+      --blue: #7C97F2; --rouge: #F07A84; --line: #2A3A6B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1730; --card: #18244A; --ink: #EEF1F7; --muted: #A3AECB;
+    --blue: #7C97F2; --rouge: #F07A84; --line: #2A3A6B;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 1.5rem 1.25rem;
+  }
+  header {
+    width: 100%; max-width: 26rem;
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 1.25rem;
+  }
+  h1 { font-family: "Young Serif", Georgia, serif; font-weight: 400; font-size: 1.5rem; margin: 0; }
+  .count { color: var(--muted); font-size: .95rem; font-variant-numeric: tabular-nums; }
+
+  .stage { width: 100%; max-width: 26rem; perspective: 1200px; flex: 0 0 auto; }
+  .card {
+    position: relative; width: 100%; aspect-ratio: 3 / 4; max-height: 60vh;
+    cursor: pointer; transform-style: preserve-3d;
+    transition: transform .45s cubic-bezier(.3,.7,.3,1);
+    border: none; background: none; padding: 0; color: inherit; font: inherit;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .card:focus-visible { outline: 3px solid var(--blue); outline-offset: 6px; border-radius: 18px; }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    background: var(--card); border-radius: 18px;
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2rem 1.5rem; text-align: center;
+  }
+  .front { border-top: 6px solid var(--blue); }
+  .back { transform: rotateY(180deg); border-top: 6px solid var(--rouge); }
+  .word { font-family: "Young Serif", Georgia, serif; font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.15; overflow-wrap: anywhere; }
+  .hint { position: absolute; bottom: 1.25rem; color: var(--muted); font-size: .85rem; }
+
+  .actions { width: 100%; max-width: 26rem; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: 1.25rem; }
+  button.btn {
+    font: inherit; font-weight: 600; font-size: 1rem;
+    padding: .9rem 1rem; border-radius: 12px; cursor: pointer;
+    border: 1.5px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  button.btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .btn.again { color: var(--rouge); }
+  .btn.know { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .restart { margin-top: 1rem; background: none; border: none; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; padding: .5rem; }
+
+  .done { text-align: center; }
+  .done .word { margin-bottom: .5rem; }
+  .done p { color: var(--muted); margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Flashcards</h1>
+    <span class="count" id="count"></span>
+  </header>
+
+  <div class="stage">
+    <button class="card" id="card" aria-label="Flip card">
+      <div class="face front"><div class="word" id="fr"></div><div class="hint">Tap to flip</div></div>
+      <div class="face back"><div class="word" id="en"></div><div class="hint">How did you do?</div></div>
+    </button>
+  </div>
+
+  <div class="actions">
+    <button class="btn again" id="again">Again</button>
+    <button class="btn know" id="know">Got it</button>
+  </div>
+  <button class="restart" id="restart">Shuffle and restart</button>
+
+<script>
+const WORDS = [
+  ["bonjour","hello"],["merci","thank you"],["au revoir","goodbye"],["s'il vous plaît","please"],
+  ["oui","yes"],["non","no"],["le chat","the cat"],["le chien","the dog"],["la maison","the house"],
+  ["l'eau","water"],["le pain","bread"],["le fromage","cheese"],["la pomme","apple"],["le livre","book"],
+  ["la voiture","car"],["le travail","work"],["l'ami","friend (m)"],["la ville","city"],["le jour","day"],
+  ["la nuit","night"],["manger","to eat"],["boire","to drink"],["parler","to speak"],["aller","to go"],
+  ["être","to be"],["avoir","to have"],["grand","big / tall"],["petit","small"],["heureux","happy"],
+  ["rouge","red"],["bleu","blue"],["aujourd'hui","today"],["demain","tomorrow"],["hier","yesterday"],
+  ["toujours","always"],["jamais","never"],["beaucoup","a lot"],["peut-être","maybe"],["le café","coffee"],
+  ["la gare","train station"]
+];
+
+const $ = id => document.getElementById(id);
+let deck = [], total = 0;
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function start() {
+  deck = shuffle(WORDS.map(w => w.slice()));
+  total = deck.length;
+  $("again").disabled = $("know").disabled = false;
+  show();
+}
+
+function show() {
+  const card = $("card");
+  card.classList.remove("flipped");
+  $("count").textContent = `${total - deck.length} / ${total} learned`;
+  if (!deck.length) {
+    $("fr").innerHTML = "Bravo !";
+    $("en").textContent = "";
+    card.querySelector(".front .hint").textContent = "You got every card";
+    $("again").disabled = $("know").disabled = true;
+    return;
+  }
+  card.querySelector(".front .hint").textContent = "Tap to flip";
+  // swap text after flip-back so the answer isn't glimpsed
+  setTimeout(() => { $("fr").textContent = deck[0][0]; $("en").textContent = deck[0][1]; }, card.dataset.wasFlipped ? 200 : 0);
+  delete card.dataset.wasFlipped;
+}
+
+$("card").onclick = () => {
+  if (!deck.length) return;
+  const c = $("card"); c.classList.toggle("flipped");
+  if (c.classList.contains("flipped")) c.dataset.wasFlipped = "1"; else delete c.dataset.wasFlipped;
+};
+$("know").onclick = () => { deck.shift(); show(); };
+$("again").onclick = () => {
+  const c = deck.shift();
+  const pos = Math.min(deck.length, 3 + Math.floor(Math.random() * 3));
+  deck.splice(pos, 0, c);
+  show();
+};
+$("restart").onclick = start;
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") $("know").click();
+  else if (e.key === "ArrowLeft") $("again").click();
+});
+
+start();
+</script>
+
+<a class="home-link" href="/" style="position:fixed;right:16px;bottom:16px;z-index:9999;padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">More things I made with AI</a>
+</body>
+</html>

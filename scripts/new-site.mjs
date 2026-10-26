@@ -42,6 +42,18 @@ if (from) {
   } else {
     fs.copyFileSync(src, path.join(dest, "index.html"));
   }
+  // Add the link back to the gallery, unless the page already has one
+  const indexPath = path.join(dest, "index.html");
+  const html = fs.readFileSync(indexPath, "utf8");
+  if (!html.includes('class="home-link"')) {
+    const link =
+      '\n<a class="home-link" href="/" style="position:fixed;right:16px;bottom:16px;z-index:9999;' +
+      "padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;" +
+      'font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">' +
+      "More things I made with AI</a>\n";
+    const out = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, link + "</body>") : html + link;
+    fs.writeFileSync(indexPath, out);
+  }
 } else {
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const tpl = fs.readFileSync(path.join(root, "templates", "site", "index.html"), "utf8");
