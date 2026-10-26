@@ -81,8 +81,7 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
-    "featured": true
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
   },
   {
     "id": "ashar-chatbot",
@@ -201,9 +200,25 @@
     "notes": "Generated with AI as a reusable template: swap in the name, date and venue and it's ready to send."
   },
   {
+    "id": "agent-travel",
+    "title": "Travel Agent",
+    "kind": "Agent",
+    "year": 2026,
+    "summary": "A trip-planning subagent: researches destinations, plans routes and schedules, breaks down the budget, and flags visas, safety and timing.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown",
+      "Subagent"
+    ],
+    "url": "https://github.com/farooqashar/AI-agents/blob/HEAD/travel.md",
+    "color": "#0081A7",
+    "glyph": "T",
+    "notes": "Defined as a subagent with web access but no permission to edit files or run commands, so it can research but not act. It works in six steps: understand preferences, research, plan logistics, optimize the route, break down the budget, and assess risks. It adapts to business, family, solo, adventure and budget trips, and always reminds you to check current entry rules before booking."
+  },
+  {
     "id": "kb-ai-agents",
-    "title": "AI agent registry",
-    "kind": "Knowledge base",
+    "title": "Agent registry",
+    "kind": "Agent",
     "year": 2026,
     "summary": "Twenty-three ready-made agent definitions, from code review and debugging to research, writing and travel planning, for use as subagents.",
     "builtWith": [
