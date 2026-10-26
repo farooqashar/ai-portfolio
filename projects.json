@@ -50,6 +50,41 @@
     "notes": "Built from my own birthday redemptions. It's a single HTML file with no build step: filter by category, search, and sort by redemption window, with tips on signing up early."
   },
   {
+    "id": "startups",
+    "title": "Startup Knowledge",
+    "kind": "Website",
+    "year": 2026,
+    "featured": true,
+    "summary": "A knowledge base on building a startup: guides on fundamentals, funding, product and team, plus case studies, frameworks and checklists.",
+    "builtWith": [
+      "AI-generated",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/startups/",
+    "repo": "https://github.com/farooqashar/startups",
+    "color": "#264653",
+    "glyph": "S",
+    "notes": "Generated with AI as a structured reference I can come back to: 12 guides, 6 case studies, 10 frameworks and 20+ checklists, organized by topic."
+  },
+  {
+    "id": "knicks-central",
+    "title": "Knicks Central",
+    "kind": "Website",
+    "year": 2026,
+    "featured": true,
+    "summary": "A Knicks game-night page with the live score, Eastern Conference standings and the team's stat leaders in one place. Demo data.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/hoopzone/",
+    "repo": "https://github.com/farooqashar/hoopzone",
+    "color": "#F58426",
+    "glyph": "K",
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
+  },
+  {
     "id": "ashar-chatbot",
     "title": "Chat with Ashar's bot",
     "kind": "Website",
@@ -81,6 +116,74 @@
     "color": "#7B5EA7",
     "glyph": "D",
     "notes": "Generated with AI. A React app that lays out my accomplishments, experiences and life events as a timeline, as a more personal companion to my main site."
+  },
+  {
+    "id": "nyc-guide",
+    "title": "New York City guide",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A one-page guide to New York: top attractions, the five boroughs and the city's culture.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/ny/",
+    "repo": "https://github.com/farooqashar/ny",
+    "color": "#2E4057",
+    "glyph": "N",
+    "notes": "Generated with AI as a single HTML page with no dependencies."
+  },
+  {
+    "id": "world-cup",
+    "title": "FIFA World Cup",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "The history of the World Cup: every tournament, every winner and the key stats.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/fifa-world-cup-website/",
+    "repo": "https://github.com/farooqashar/fifa-world-cup-website",
+    "color": "#048A81",
+    "glyph": "W",
+    "notes": "Generated with AI around the 2026 World Cup, with sections for history, past winners and stats."
+  },
+  {
+    "id": "habitarie",
+    "title": "Habitarie",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A habit tracker and calorie counter in one page: log food against a daily goal and check off habits day by day.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/habitarie/",
+    "repo": "https://github.com/farooqashar/habitarie",
+    "color": "#58A55C",
+    "glyph": "H",
+    "notes": "Generated with AI as a single-page app with no backend: a daily calorie goal with protein, carbs and fat, a food log, and a habit checklist."
+  },
+  {
+    "id": "party-invite",
+    "title": "Birthday party invitation",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A playful invitation page for a birthday party, with the event details and an RSVP form. Sample event.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "GitHub Pages"
+    ],
+    "url": "https://farooqashar.github.io/birthday-party-website/",
+    "repo": "https://github.com/farooqashar/birthday-party-website",
+    "color": "#B5179E",
+    "glyph": "P",
+    "notes": "Generated with AI as a reusable template: swap in the name, date and venue and it's ready to send."
   },
   {
     "id": "celebrations",
