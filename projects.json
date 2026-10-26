@@ -54,7 +54,6 @@
     "title": "Startup Knowledge",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "A knowledge base on building a startup: guides on fundamentals, funding, product and team, plus case studies, frameworks and checklists.",
     "builtWith": [
       "AI-generated",
@@ -258,6 +257,22 @@
     "color": "#A4161A",
     "glyph": "M",
     "notes": "The 2019 and 2020 course materials gathered into one indexed repo, so an AI assistant can draw on them when I'm learning or working at the command line."
+  },
+  {
+    "id": "kb-mit-intro-cs",
+    "title": "MIT Intro to CS notes",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "Study notes for MIT 6.0001/6.0002, Intro to CS in Python: every session summarized, with deep dives on object-oriented programming and an OOP study guide.",
+    "builtWith": [
+      "AI-generated",
+      "Santai Hub",
+      "Markdown"
+    ],
+    "url": "https://hub.sant.ai/base/123",
+    "color": "#A31F34",
+    "glyph": "6",
+    "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials and published on Santai Hub. It has a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
   },
   {
     "id": "celebrations",
