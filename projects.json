@@ -63,7 +63,8 @@
     "repo": "https://github.com/farooqashar/startups",
     "color": "#264653",
     "glyph": "S",
-    "notes": "Generated with AI as a structured reference I can come back to: 12 guides, 6 case studies, 10 frameworks and 20+ checklists, organized by topic."
+    "notes": "Generated with AI as a structured reference I can come back to: 12 guides, 6 case studies, 10 frameworks and 20+ checklists, organized by topic.",
+    "featured": true
   },
   {
     "id": "knicks-central",
@@ -80,7 +81,8 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
+    "featured": true
   },
   {
     "id": "ashar-chatbot",
@@ -275,6 +277,22 @@
     "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials and published on Santai Hub. It has a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
   },
   {
+    "id": "kb-nfl",
+    "title": "NFL knowledge base",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "A primer on the National Football League: how the league works, the rules of the game, the teams and divisions, and the Super Bowl.",
+    "builtWith": [
+      "AI-generated",
+      "Santai Hub",
+      "Markdown"
+    ],
+    "url": "https://hub.sant.ai/base/4",
+    "color": "#013369",
+    "glyph": "N",
+    "notes": "Four notes published on Santai Hub as a base an AI assistant can draw on: a league overview, rules and gameplay, teams and divisions, and Super Bowl history."
+  },
+  {
     "id": "celebrations",
     "title": "Daily celebrations post",
     "kind": "Automation",
@@ -320,6 +338,23 @@
     "color": "#3A2FE0",
     "glyph": "E",
     "notes": "Claude checks Luma, Meetup, Eventbrite and other listings, keeps only free, in-person NYC events with confirmed dates, pulls my invites from Gmail, and skips anything it already sent last week. It only reads and sends one email; it never RSVPs."
+  },
+  {
+    "id": "daily-news",
+    "title": "Daily News Update",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every morning, the latest world news is compiled into an organized email digest covering politics, business, technology and breaking news.",
+    "builtWith": [
+      "Santai workflow",
+      "Python",
+      "Email"
+    ],
+    "url": "https://hub.sant.ai/base/6",
+    "schedule": "Every day",
+    "color": "#3C3C3C",
+    "glyph": "N",
+    "notes": "Built and published as a workflow on Santai Hub, where others can download and run it for themselves."
   },
   {
     "id": "gmail-labels",

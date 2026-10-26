@@ -78,9 +78,10 @@
     document.getElementById("detail-notes").textContent = p.notes || "";
     document.getElementById("detail-tools").innerHTML = (p.builtWith || []).map((t) => `<li>${esc(t)}</li>`).join("");
     const actions = [];
+    const openLabel = p.kind === "Website" ? "Visit site" : "Open it";
     if (p.url) actions.push(isLocal(p.url)
-      ? `<a class="btn primary" href="${esc(p.url)}">Visit site</a>`
-      : `<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">Visit site</a>`);
+      ? `<a class="btn primary" href="${esc(p.url)}">${openLabel}</a>`
+      : `<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">${openLabel}</a>`);
     if (p.repo) actions.push(`<a class="btn" href="${esc(p.repo)}" target="_blank" rel="noopener">View code</a>`);
     document.getElementById("detail-actions").innerHTML = actions.join("");
     dialog.showModal();
