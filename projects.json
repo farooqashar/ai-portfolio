@@ -268,13 +268,11 @@
     "summary": "Study notes for MIT 6.0001/6.0002, Intro to CS in Python: every session summarized, with deep dives on object-oriented programming and an OOP study guide.",
     "builtWith": [
       "AI-generated",
-      "Santai Hub",
       "Markdown"
     ],
-    "url": "https://hub.sant.ai/base/123",
     "color": "#A31F34",
     "glyph": "6",
-    "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials and published on Santai Hub. It has a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
+    "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials: a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
   },
   {
     "id": "kb-nfl",
@@ -284,13 +282,11 @@
     "summary": "A primer on the National Football League: how the league works, the rules of the game, the teams and divisions, and the Super Bowl.",
     "builtWith": [
       "AI-generated",
-      "Santai Hub",
       "Markdown"
     ],
-    "url": "https://hub.sant.ai/base/4",
     "color": "#013369",
     "glyph": "N",
-    "notes": "Four notes published on Santai Hub as a base an AI assistant can draw on: a league overview, rules and gameplay, teams and divisions, and Super Bowl history."
+    "notes": "Four notes an AI assistant can draw on: a league overview, rules and gameplay, teams and divisions, and Super Bowl history."
   },
   {
     "id": "celebrations",
@@ -346,15 +342,14 @@
     "year": 2026,
     "summary": "Every morning, the latest world news is compiled into an organized email digest covering politics, business, technology and breaking news.",
     "builtWith": [
-      "Santai workflow",
+      "AI-generated",
       "Python",
       "Email"
     ],
-    "url": "https://hub.sant.ai/base/6",
     "schedule": "Every day",
     "color": "#3C3C3C",
     "glyph": "N",
-    "notes": "Built and published as a workflow on Santai Hub, where others can download and run it for themselves."
+    "notes": "A Python workflow that gathers the morning's top stories, groups them by topic, and sends one organized email digest."
   },
   {
     "id": "gmail-labels",
