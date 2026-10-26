@@ -56,13 +56,14 @@
     "year": 2026,
     "summary": "A personal chatbot that answers questions about me, my work and my background.",
     "builtWith": [
+      "AI-generated",
       "SvelteKit",
       "Vercel"
     ],
     "url": "https://chat.asharfarooq.xyz",
     "color": "#3D5A80",
     "glyph": "?",
-    "notes": ""
+    "notes": "Generated with AI. It's a SvelteKit app that knows about my background and work, so visitors can ask it questions instead of reading a resume. It also links out to my site, GitHub and LinkedIn."
   },
   {
     "id": "ashar-things",
@@ -71,6 +72,7 @@
     "year": 2026,
     "summary": "A timeline of things I've done: accomplishments, experiences and life events.",
     "builtWith": [
+      "AI-generated",
       "React",
       "Vite",
       "Vercel"
@@ -78,7 +80,7 @@
     "url": "https://done.asharfarooq.xyz",
     "color": "#7B5EA7",
     "glyph": "D",
-    "notes": ""
+    "notes": "Generated with AI. A React app that lays out my accomplishments, experiences and life events as a timeline, as a more personal companion to my main site."
   },
   {
     "id": "celebrations",
