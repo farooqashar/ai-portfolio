@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halal Map — NYC & Long Island</title>
+  <meta name="description" content="A curated map of great halal food across New York City and Long Island, filterable by area, price and cuisine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <div class="app" data-view="list">
+    <aside class="panel" aria-label="Restaurants">
+      <header class="brand">
+        <div class="brand-mark" aria-hidden="true">☾</div>
+        <div>
+          <h1>Halal Map</h1>
+          <p>The best halal eats in NYC &amp; Long Island</p>
+        </div>
+      </header>
+
+      <div class="controls">
+        <label class="search">
+          <span class="sr-only">Search</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search name, dish, neighborhood…" autocomplete="off" />
+        </label>
+
+        <div class="filter-group" role="group" aria-labelledby="area-label">
+          <span id="area-label" class="filter-label">Area</span>
+          <div class="chips" id="areaChips"></div>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group" role="group" aria-labelledby="price-label">
+            <span id="price-label" class="filter-label">Price</span>
+            <div class="chips" id="priceChips"></div>
+          </div>
+          <div class="filter-group grow">
+            <label for="cuisine" class="filter-label">Cuisine</label>
+            <select id="cuisine"></select>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <span id="count" class="count" aria-live="polite"></span>
+          <div class="toolbar-actions">
+            <button id="nearMe" class="btn ghost" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+              Near me
+            </button>
+            <button id="reset" class="btn ghost" type="button">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <ul id="list" class="list"></ul>
+
+      <footer class="note">
+        Halal status is as each restaurant describes it, and certification can change. Check hours and status before you go. Last verified Oct 2026.
+      </footer>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map" role="region" aria-label="Map of halal restaurants"></div>
+    </main>
+
+    <nav class="view-toggle" aria-label="Switch view">
+      <button type="button" data-view="list" aria-pressed="true">List</button>
+      <button type="button" data-view="map" aria-pressed="false">Map</button>
+    </nav>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+
+<a class="home-link" href="/" style="position:fixed;right:16px;bottom:34px;z-index:9999;padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">More things I made with AI</a>
+</body>
+</html>

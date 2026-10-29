@@ -67,6 +67,23 @@
     "featured": true
   },
   {
+    "id": "halal-map",
+    "title": "Halal Map: NYC & Long Island",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "An interactive map of 30 standout halal spots across the five boroughs and Long Island, from street carts to sit-down Afghan, Uyghur and Yemeni.",
+    "builtWith": [
+      "AI-generated",
+      "Leaflet",
+      "OpenStreetMap"
+    ],
+    "url": "/p/halal-map/",
+    "color": "#0E5C46",
+    "glyph": "☾",
+    "notes": "Generated with AI as a static site on Leaflet and OpenStreetMap. Each spot was researched and pinned by address, with what to order, a price level and tags like late night or group-friendly. Filter by area, price and cuisine, sort by distance with Near me, and get directions from any pin. On a phone it switches between list and map.",
+    "featured": true
+  },
+  {
     "id": "ai-startup-atlas",
     "title": "Atlas: AI Startup Directory",
     "kind": "Website",
@@ -115,7 +132,8 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
+    "featured": true
   },
   {
     "id": "ashar-chatbot",
@@ -234,6 +252,39 @@
     "notes": "Generated with AI as a reusable template: swap in the name, date and venue and it's ready to send."
   },
   {
+    "id": "ashar-mcp",
+    "title": "My personal MCP server",
+    "kind": "Tool",
+    "year": 2026,
+    "featured": true,
+    "summary": "An MCP server that lets Claude, or any AI assistant, answer questions about my trips, travel trackers and Things Done timeline.",
+    "builtWith": [
+      "Python",
+      "FastMCP",
+      "Vercel"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-mcp",
+    "color": "#1D3557",
+    "glyph": "M",
+    "notes": "Ten read-only tools, including has_visited, list_trips, travel_trackers, things_done and search_everything, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
+  },
+  {
+    "id": "ashar-cli",
+    "title": "ashar CLI",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "My personal command-line tool: ashar commute for transit directions on my saved route, and ashar trip for instant trip-planning links.",
+    "builtWith": [
+      "Python",
+      "uv",
+      "GitHub Actions"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-cli",
+    "color": "#2B2D42",
+    "glyph": ">",
+    "notes": "Packaged as ashar-cli with the command ashar. Your stations are saved privately in your own config file, never in the package. Tests run in CI, and tagging a release publishes to PyPI through GitHub Actions."
+  },
+  {
     "id": "agent-travel",
     "title": "Travel Agent",
     "kind": "Agent",
@@ -338,6 +389,50 @@
     "notes": "Four notes an AI assistant can draw on: a league overview, rules and gameplay, teams and divisions, and Super Bowl history."
   },
   {
+    "id": "kb-tech-concepts",
+    "title": "Tech Concepts",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "Plain-language explanations of the concepts behind everyday software: DNS, CDNs, HTTPS, OAuth, containers, serverless, webhooks, MCP and more.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/knowledge-bases/tree/HEAD/tech-concepts",
+    "color": "#3A86FF",
+    "glyph": "T",
+    "notes": "Thirteen evergreen entries grouped into networking, infrastructure and more. Each covers what the concept is, how it works, the terms you'll run into, a small example and common mistakes. Part of my public knowledge-bases repo, which only holds topics that should stay accurate for years."
+  },
+  {
+    "id": "kb-mit",
+    "title": "MIT knowledge base",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "MIT's course numbers, academics, campus and buildings, traditions, hacks and vocabulary, in one place.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/knowledge-bases/tree/HEAD/mit",
+    "color": "#A31F34",
+    "glyph": "∞",
+    "notes": "Six reference pages for prospective students, new students and anyone curious, from what Course 6 means to the Brass Rat, the smoot and the history of the hacks. Facts are checked against the sources listed on each page. Part of my public knowledge-bases repo."
+  },
+  {
+    "id": "kb-startup-equity",
+    "title": "Startup finance & equity concepts",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "A concepts-only reference on SAFEs, cap tables, vesting, RSUs vs. options, 83(b) elections and how RSU taxes work.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "color": "#6A994E",
+    "glyph": "%",
+    "notes": "Six short explainers. It sticks to how each concept works in general and gives no personal or tax advice."
+  },
+  {
     "id": "celebrations",
     "title": "Daily celebrations post",
     "kind": "Automation",
@@ -399,6 +494,54 @@
     "color": "#3C3C3C",
     "glyph": "N",
     "notes": "A Python workflow that gathers the morning's top stories, groups them by topic, and sends one organized email digest."
+  },
+  {
+    "id": "morning-brief",
+    "title": "Morning brief",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "A 9 AM email that sums up my day: what needs attention across my calendar, inbox and docs, plus top New York, U.S. and world headlines.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Gmail",
+      "Google Calendar",
+      "Web search"
+    ],
+    "schedule": "Every day",
+    "color": "#F4A261",
+    "glyph": "☀",
+    "notes": "Claude reads today's and tomorrow's calendar, checks each email thread before flagging it so it never nags about something I already answered, and pulls fresh headlines with their sources. It only gathers and sends the one email."
+  },
+  {
+    "id": "unsubscribe-picks",
+    "title": "Unsubscribe picks",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every Tuesday afternoon, a ranked list of email subscriptions worth dropping, each with its unsubscribe link ready to tap.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Gmail"
+    ],
+    "schedule": "Weekly",
+    "color": "#8D99AE",
+    "glyph": "U",
+    "notes": "Claude groups two weeks of bulk mail by sender and counts volume. Since I read most mail, it checks whether I've ever replied to a sender rather than relying on unread status. Picks are sorted into unsubscribe, check first, and your call, and receipts, bills and security alerts are never suggested. It's strictly read-only: it copies the unsubscribe link but never clicks it."
+  },
+  {
+    "id": "ny-freebies",
+    "title": "NY Daily Freebies",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every other morning, an email of the best free and cheap offers around New York that day, gathered from Reddit, deal sites and brand accounts.",
+    "builtWith": [
+      "AI-generated",
+      "Python",
+      "Email"
+    ],
+    "schedule": "Every other day",
+    "color": "#E76F51",
+    "glyph": "$",
+    "notes": "A Python workflow that searches several deal sources, keeps the ones that are actually free or close to it, and sends one digest at 8 AM."
   },
   {
     "id": "gmail-labels",
@@ -519,7 +662,7 @@
       "Web search"
     ],
     "schedule": "Weekly",
-    "color": "#E76F51",
+    "color": "#C44536",
     "glyph": "M",
     "notes": "Claude searches the past week, confirms each result is actually about me rather than someone with the same name, and puts uncertain ones in a separate section. If nothing turned up, the report is one line."
   },
@@ -530,13 +673,14 @@
     "year": 2026,
     "summary": "Turns event posts in a Slack channel into Google Calendar events, without duplicates, and updates them when the post changes.",
     "builtWith": [
-      "Claude",
+      "Claude scheduled tasks",
       "Slack",
       "Google Calendar"
     ],
     "color": "#5B8E7D",
     "glyph": "S",
-    "notes": "The tricky part was making it duplicate-safe and update-aware: each event keeps a link back to its Slack message, so a re-run edits the existing event instead of adding a second one."
+    "notes": "The tricky part was making it duplicate-safe and update-aware: each event keeps a link back to its Slack message, so a re-run edits the existing event instead of adding a second one.",
+    "schedule": "Every day"
   },
   {
     "id": "this-site",
