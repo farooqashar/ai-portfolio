@@ -1,11 +1,13 @@
 # Hosted sites
 
-Each folder here is one frontend site, served at `/p/<folder>/`.
+Each folder here is one small site, served at `/p/<folder>/`.
 
-Rules for a site in this folder:
+A site in this folder must:
 
-- It must have an `index.html` at the top of its folder.
-- Use relative paths for its own files (`style.css`, `img/logo.png`), not paths starting with `/`, which point at the gallery's root.
-- Plain HTML, CSS and JavaScript only. Anything with a build step or an npm install gets its own repo instead.
+- Have an `index.html` at the top of its folder.
+- Use relative paths for its own files (`style.css`, `img/logo.png`). Paths starting with `/` point at the gallery's root instead.
+- Be plain HTML, CSS and JavaScript. Anything with a build step, an `npm install` or a server gets its own repo and is linked from the gallery.
 
-Add a new one with `node scripts/new-site.mjs` (see the main README).
+Libraries loaded from a CDN are fine.
+
+Add a site with `node scripts/new-site.mjs`. See the [main README](../README.md).
