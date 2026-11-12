@@ -6,6 +6,11 @@
 
   const CACHE_KEY = "changelog:v1";
   const CACHE_MS = 10 * 60 * 1000;
+  const FETCH_MS = 10 * 1000;
+
+  // marked and DOMPurify load async, so the feed never waits on the CDN. Re-render once they arrive
+  let rendered = false;
+  document.querySelectorAll("script.md-lib").forEach((s) => s.addEventListener("load", () => rendered && renderList()));
 
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const releasesUrl = (r) => `https://github.com/${r.repo}/releases`;
@@ -20,11 +25,19 @@
     return;
   }
 
-  // Each repo is fetched on its own, so one failure doesn't hide the others
+  // Each repo is fetched on its own, so one failure doesn't hide the others.
+  // A stalled request is aborted, body included, so it counts as failed instead of holding up the rest
   async function fetchRepo(r) {
-    const res = await fetch(`https://api.github.com/repos/${r.repo}/releases?per_page=20`, { headers: { Accept: "application/vnd.github+json" } });
-    if (!res.ok) throw new Error(`${r.repo}: HTTP ${res.status}`);
-    const data = await res.json();
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
+    let data;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${r.repo}/releases?per_page=20`, { headers: { Accept: "application/vnd.github+json" }, signal: ctrl.signal });
+      if (!res.ok) throw new Error(`${r.repo}: HTTP ${res.status}`);
+      data = await res.json();
+    } finally {
+      clearTimeout(timer);
+    }
     return data
       .filter((x) => !x.draft && !x.prerelease && x.published_at)
       .map((x) => ({ repo: r.repo, name: x.name, tag: x.tag_name, date: x.published_at, body: x.body || "", url: x.html_url }));
@@ -62,8 +75,8 @@
 
   const labelOf = (repo) => (repos.find((r) => r.repo === repo) || {}).label || repo;
   const date = (iso) => new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-  const canRender = typeof marked !== "undefined" && typeof DOMPurify !== "undefined";
-  const renderBody = (md) => canRender
+  const canRender = () => typeof marked !== "undefined" && typeof DOMPurify !== "undefined";
+  const renderBody = (md) => canRender()
     ? DOMPurify.sanitize(marked.parse(md))
     : `<p style="white-space:pre-wrap">${esc(md)}</p>`;
 
@@ -85,6 +98,7 @@
   });
 
   function renderList() {
+    rendered = true;
     const shown = releases.filter((x) => active === "All" || x.repo === active);
     list.innerHTML = shown.map((x) => `<li>
       <article class="release">
@@ -101,7 +115,7 @@
     if (!shown.length) {
       const ok = repos.filter((r) => !failed.includes(r) && (active === "All" || r.repo === active));
       loading.hidden = !ok.length;
-      if (ok.length) loading.innerHTML = `No releases yet. Follow along on GitHub:${repoLinks(ok)}`;
+      if (ok.length) loading.innerHTML = `No recent stable releases. See every release on GitHub:${repoLinks(ok)}`;
     } else {
       loading.hidden = true;
     }
