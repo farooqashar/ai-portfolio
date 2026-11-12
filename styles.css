@@ -46,6 +46,7 @@ a { color: inherit; }
 .intro { padding: clamp(40px, 8vw, 96px) 0 clamp(28px, 4vw, 48px); }
 .byline { margin: 0 0 18px; font-weight: 600; }
 .byline a { text-decoration: none; border-bottom: 2px solid var(--sun); }
+.byline a + a { margin-left: 14px; }
 .headline {
   margin: 0;
   font-size: clamp(3.2rem, 11vw, 9.5rem);
