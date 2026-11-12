@@ -19,6 +19,8 @@ vercel.json, .vercelignore       deploy settings
 
 ## Add a project
 
+Make changes through a pull request so they are labelled automatically and land in the changelog.
+
 There are two ways, depending on where the project lives.
 
 ### A small site hosted here

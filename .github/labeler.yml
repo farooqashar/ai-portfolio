@@ -1,0 +1,9 @@
+gallery:
+  - changed-files:
+      - any-glob-to-any-file: ["projects.json", "p/**"]
+site:
+  - changed-files:
+      - any-glob-to-any-file: ["index.html", "styles.css", "app.js"]
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ["**/*.md"]
