@@ -19,7 +19,7 @@ vercel.json, .vercelignore       deploy settings
 
 ## Add a project
 
-Make changes through a pull request so they are labelled automatically and land in the changelog.
+Make changes through a pull request: each one is labelled automatically by the files it touches, and GitHub builds its generated release notes from merged pull requests and their labels.
 
 There are two ways, depending on where the project lives.
 
