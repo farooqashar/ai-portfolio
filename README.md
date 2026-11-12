@@ -89,3 +89,9 @@ Open http://localhost:8000. Opening `index.html` directly won't work, because th
 ## Deploy
 
 The repo is a Vercel project with no framework and no build command, deploying from `main` to `ai.asharfarooq.xyz`. The domain's DNS is managed outside Vercel, with a CNAME record for `ai` pointing at Vercel.
+
+## Changelog
+
+Releases are cut monthly and listed on the repo's [Releases](https://github.com/farooqashar/ai-portfolio/releases) page. The site has no version number, so tags use the year and month: `v2026.11` is the release for November 2026. On the 1st of each month, `.github/workflows/monthly-release.yml` tags the previous month with notes generated from the PRs merged since the last release. It does nothing if that month is already released or no PRs were merged.
+
+For an off-cycle release, run the **Monthly release** workflow manually from the Actions tab.

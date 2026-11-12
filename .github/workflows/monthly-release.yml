@@ -1,0 +1,58 @@
+name: Monthly release
+
+# Cuts a CalVer release (vYYYY.MM) for the previous month, with notes
+# generated from the PRs merged since the last release.
+on:
+  schedule:
+    - cron: "0 14 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monthly-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Cut the release for last month
+        run: |
+          set -euo pipefail
+
+          # A run on Dec 1 releases v2026.11, titled "November 2026".
+          last_month="$(date -u -d "$(date -u +%Y-%m-01) -1 month" +%Y-%m-01)"
+          tag="v$(date -u -d "$last_month" +%Y.%m)"
+          title="$(date -u -d "$last_month" '+%B %Y')"
+
+          if gh api "repos/$GH_REPO/git/ref/tags/$tag" --silent 2>/dev/null; then
+            echo "Tag $tag already exists, nothing to do."
+            exit 0
+          fi
+
+          # The last CalVer release, if any, and when it was published.
+          last_release="$(gh release list --limit 100 --json tagName,publishedAt \
+            --jq '[.[] | select(.tagName | test("^v[0-9]{4}\\.[0-9]{2}$"))] | sort_by(.publishedAt) | last // empty | "\(.tagName) \(.publishedAt)"')"
+
+          search=""
+          if [ -n "$last_release" ]; then
+            since="${last_release#* }"
+            search="merged:>$since"
+            echo "Last release: ${last_release% *}, published $since."
+          else
+            echo "No earlier release found."
+          fi
+
+          merged="$(gh pr list --state merged --base main --search "$search" --limit 1 --json number --jq 'length')"
+          if [ "$merged" -eq 0 ]; then
+            echo "No PRs merged since the last release, nothing to do."
+            exit 0
+          fi
+
+          gh release create "$tag" --target main --title "$title" --generate-notes
+          echo "Created release $tag ($title)."
