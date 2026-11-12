@@ -3,6 +3,8 @@
   const empty = document.getElementById("empty");
   const group = document.getElementById("filter-group");
   const dialog = document.getElementById("detail");
+  const search = document.getElementById("search");
+  const sort = document.getElementById("sort");
 
   let projects = [];
   try {
@@ -42,12 +44,28 @@
     renderGrid();
   });
 
+  // Search and sort
+  const haystack = (p) => [p.title, p.summary, p.kind, p.notes, p.schedule, ...(p.builtWith || [])].join(" ").toLowerCase();
+  const sorters = {
+    az: (a, b) => a.title.localeCompare(b.title),
+    za: (a, b) => b.title.localeCompare(a.title),
+    kind: (a, b) => a.kind.localeCompare(b.kind) || a.title.localeCompare(b.title),
+  };
+  search.addEventListener("input", renderGrid);
+  sort.addEventListener("change", renderGrid);
+
   function renderGrid() {
-    const list = projects.filter((p) => active === "All" || p.kind === active);
+    const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const list = projects
+      .filter((p) => active === "All" || p.kind === active)
+      .filter((p) => { const h = haystack(p); return terms.every((t) => h.includes(t)); });
+    if (sorters[sort.value]) list.sort(sorters[sort.value]);
+    // Featured and wide sizes balance the curated layout, so only keep them there
+    const curated = active === "All" && !terms.length && sort.value === "picked";
     empty.hidden = list.length > 0;
     grid.innerHTML = list.map((p) => {
       const where = p.url ? host(p.url) : p.schedule ? `Runs ${p.schedule.toLowerCase()}` : p.repo ? p.repo.replace(/^https?:\/\//, "") : "";
-      const cls = active !== "All" ? "" : p.wide ? "wide" : p.featured ? "featured" : "";
+      const cls = !curated ? "" : p.wide ? "wide" : p.featured ? "featured" : "";
       return `<li class="${cls}">
         <button class="card" type="button" data-id="${esc(p.id)}" style="--c:${esc(p.color)}">
           <div class="cover" aria-hidden="true"><span class="kind">${esc(p.kind)}</span><span class="glyph">${esc(p.glyph || p.title[0])}</span></div>

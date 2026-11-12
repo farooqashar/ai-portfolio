@@ -21,10 +21,25 @@
   <main>
     <nav class="filters" aria-label="Filter projects">
       <div role="group" id="filter-group"></div>
+      <div class="tools-bar">
+        <label class="search">
+          <span class="visually-hidden">Search projects</span>
+          <input type="search" id="search" placeholder="Search by name, tool or idea" autocomplete="off">
+        </label>
+        <label class="sort">
+          <span>Sort</span>
+          <select id="sort">
+            <option value="picked">My picks</option>
+            <option value="az">A to Z</option>
+            <option value="za">Z to A</option>
+            <option value="kind">By type</option>
+          </select>
+        </label>
+      </div>
     </nav>
 
     <ul class="grid" id="grid" aria-live="polite"></ul>
-    <p class="empty" id="empty" hidden>Nothing here yet. Pick another filter to see more projects.</p>
+    <p class="empty" id="empty" hidden>Nothing matches. Try another search or filter to see more projects.</p>
   </main>
 
   <footer class="foot">
