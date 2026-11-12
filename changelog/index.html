@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog | Made with AI by Ashar Farooq</title>
+  <meta name="description" content="Release notes from Ashar Farooq's AI projects, in one feed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233A2FE0'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='36' text-anchor='middle' fill='%23FFD23F'%3EA%3C/text%3E%3C/svg%3E">
+  <style>
+    .releases { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; max-width: 820px; }
+    .release { background: var(--paper); border-radius: var(--radius-lg); padding: 22px 26px 24px; overflow-wrap: anywhere; }
+    .release-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 6px; }
+    .release-repo { padding: 3px 12px; border-radius: var(--radius-sm); background: var(--ultra); color: #fff; font-size: .85rem; font-weight: 600; }
+    .release time { color: var(--muted); font-size: .95rem; }
+    .release h2 { margin: 0; font-size: 1.6rem; line-height: 1.1; font-variation-settings: "opsz" 48, "wdth" 85; }
+    .release h2 a { text-decoration: none; }
+    .release h2 a:hover { text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: 3px; }
+    .release-tag { color: var(--muted); font-weight: 400; font-size: 1rem; margin-left: 6px; }
+    .release-body { margin-top: 12px; }
+    .release-body > :first-child { margin-top: 0; }
+    .release-body > :last-child { margin-bottom: 0; }
+    .release-body h1, .release-body h2, .release-body h3 { font-size: 1.1rem; margin: 18px 0 6px; }
+    .release-body img { max-width: 100%; height: auto; }
+    .release-body pre { overflow-x: auto; padding: 12px 14px; border-radius: 12px; background: var(--fog); }
+    .release-body code { font-size: .9em; }
+    .release-body a { text-decoration-color: var(--ultra); }
+    .release-link { display: inline-block; margin-top: 14px; font-weight: 600; font-size: .95rem; }
+    .notice { max-width: 820px; color: var(--muted); }
+    .notice ul, .empty ul { margin: 8px 0 0; padding-left: 1.2em; }
+    .notice + .releases { margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <p class="byline"><a href="../">More things I made with AI</a></p>
+    <h1 class="headline">Changelog.</h1>
+    <p class="lede">Release notes from the projects I build with AI, newest first.</p>
+  </header>
+
+  <main>
+    <nav class="filters" aria-label="Filter releases">
+      <div role="group" id="filter-group"></div>
+    </nav>
+
+    <div class="notice" id="notice" hidden></div>
+    <ul class="releases" id="releases" aria-live="polite"></ul>
+    <div class="empty" id="loading">Loading releases…</div>
+  </main>
+
+  <footer class="foot">
+    <p>Release notes come straight from GitHub. <a href="../">Back to the gallery</a>.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/18.2.0/lib/marked.umd.min.js" integrity="sha512-Gb+Z9vS9wxUD+XTPT9S8H0d8vsWMwoMS+kxvrNWdm0+r9oDLQi6AZ/l4ttufLd3ONdrAF9OeRPOjTY/nLf6RnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.17/purify.min.js" integrity="sha512-2wT0W6vojz3cJuLoa/DxrPVQRinkfRjFWMWIDK4NghTqObEhpem1nEkeK0d9ZE+/hyvfMNuJZlfxM4LsRgeoSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="changelog.js"></script>
+</body>
+</html>
