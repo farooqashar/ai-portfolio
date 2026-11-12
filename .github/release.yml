@@ -1,0 +1,14 @@
+changelog:
+  exclude:
+    labels: [skip-changelog]
+  categories:
+    - title: 🆕 New in the gallery
+      labels: [gallery]
+    - title: ✨ Site improvements
+      labels: [site, enhancement]
+    - title: 🐛 Fixes
+      labels: [bug]
+    - title: 📝 Docs
+      labels: [documentation]
+    - title: Other changes
+      labels: ["*"]
