@@ -101,6 +101,43 @@
     "featured": true
   },
   {
+    "id": "lirr-live",
+    "title": "LIRR Live",
+    "kind": "Website",
+    "year": 2026,
+    "featured": true,
+    "summary": "Live Long Island Rail Road departures with track numbers, including the expected track before it's posted and track changes. Built for checking the next train from Huntington, Penn or Grand Central.",
+    "builtWith": [
+      "Claude",
+      "Vercel",
+      "MTA TrainTime"
+    ],
+    "url": "https://lirr-live.vercel.app",
+    "repo": "https://github.com/farooqashar/LIRR-Status",
+    "color": "#0039A6",
+    "glyph": "L",
+    "notes": "A small Vercel function fetches the MTA's TrainTime feed, trims it and caches it for 15 seconds, and a single mobile-first page shows countdowns, on-time or late status, stop lists and service alerts, refreshing every 30 seconds. Pick any two stations or tap a quick route, and the choice is saved in the link."
+  },
+  {
+    "id": "reading-shelf",
+    "title": "Reading Shelf",
+    "kind": "Website",
+    "year": 2026,
+    "featured": true,
+    "summary": "Everything I've been reading, as a bookshelf with one spine per article, plus a searchable reading log and an RSS feed. It updates itself whenever I clip something new.",
+    "builtWith": [
+      "Claude",
+      "Netlify",
+      "Obsidian",
+      "GitHub Actions"
+    ],
+    "url": "https://ashar-reading-shelf.netlify.app",
+    "repo": "https://github.com/farooqashar/Reading-Shelf",
+    "color": "#8C5E3C",
+    "glyph": "R",
+    "notes": "I clip pages into my Obsidian vault, which syncs to GitHub. A GitHub Action in the vault pings a Netlify build hook, and the build reads every clipping's metadata and writes the shelf, a JSON file and the feed. Only titles, links, tags and dates are published; the article text stays in the vault."
+  },
+  {
     "id": "mini-football",
     "title": "Mini Football",
     "kind": "Website",
@@ -218,6 +255,39 @@
     "notes": "Made as a Claude artifact, then moved here as the first site hosted inside this portfolio. One HTML file: tap a card to flip it, and words you miss get shuffled back in a few cards later. Arrow keys work too."
   },
   {
+    "id": "flag-night",
+    "title": "Flag Night",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A big-screen flag guessing game for a room: one huge flag at a time, shout your guesses, then reveal the country and a fun fact.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "JavaScript"
+    ],
+    "url": "/p/flag-night/",
+    "color": "#C8102E",
+    "glyph": "⚑",
+    "notes": "Generated with AI as a single HTML file, made for putting on a projector. There are three decks: 28 well-known flags, 34 unusual ones like Nepal's pennants, Bhutan's dragon and Mozambique's rifle, or both shuffled together. Two levels of hints, a fun fact on every reveal, a running score, and a list of the ones that got away at the end. The host runs it all from the keyboard. Flags load from flagcdn.",
+    "featured": true
+  },
+  {
+    "id": "map-quiz",
+    "title": "Name 'Em All map quiz",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A map quiz for a group: one country or US state lights up gold, the room names it, and the map fills in green or red as you go.",
+    "builtWith": [
+      "AI-generated",
+      "D3",
+      "TopoJSON"
+    ],
+    "url": "/p/map-quiz/",
+    "color": "#2A8FD6",
+    "glyph": "◍",
+    "notes": "Generated with AI as a single HTML file that draws Natural Earth and Census maps with D3. Five modes: every country, famous, medium, small and fun, or the 50 states. Answers are written on the map so the whole room can read them, with a timer, zoom for tiny countries, and keyboard controls for whoever's hosting."
+  },
+  {
     "id": "habitarie",
     "title": "Habitarie",
     "kind": "Website",
@@ -269,6 +339,24 @@
     "notes": "Ten read-only tools, including has_visited, list_trips, travel_trackers, things_done and search_everything, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
   },
   {
+    "id": "ashistant",
+    "title": "Ashistant Discord bot",
+    "kind": "Tool",
+    "year": 2026,
+    "featured": true,
+    "summary": "An AI bot for my Discord server with a dozen slash commands: /ask, /tldr, /research, /event, /remind, /food, /summarize, /vibe-check, /trivia and more.",
+    "builtWith": [
+      "Claude",
+      "Cloudflare Workers",
+      "Cloudflare D1",
+      "Discord"
+    ],
+    "repo": "https://github.com/farooqashar/Discord-AI-General-Bot",
+    "color": "#5865F2",
+    "glyph": "/",
+    "notes": "Runs free on Cloudflare Workers with no server to keep up. Each command is an HTTP request: the Worker checks Discord's signature, replies \"thinking…\" right away, then edits in the answer. /event creates a real Discord event with an Add to Google Calendar button, /research posts a sourced report in a thread, and reminders live in a D1 database checked every minute."
+  },
+  {
     "id": "ashar-cli",
     "title": "ashar CLI",
     "kind": "Tool",
@@ -314,6 +402,21 @@
     "color": "#5F0F40",
     "glyph": "A",
     "notes": "Each agent is one Markdown file describing its role, scope and approach, with a guide on how to plug them into an AI coding tool as focused subagents."
+  },
+  {
+    "id": "delete-me",
+    "title": "Delete Me",
+    "kind": "Agent",
+    "year": 2026,
+    "summary": "A privacy agent that scans my inbox for the companies and data brokers that likely hold my data, then helps me unsubscribe and drafts a data deletion request to each one.",
+    "builtWith": [
+      "AI agent",
+      "Gmail"
+    ],
+    "color": "#B23A48",
+    "glyph": "✕",
+    "notes": "It builds an inventory of companies with the evidence, the data each likely holds and a recommended action, and waits for my say before doing anything. Requests cite a privacy law only where one actually applies, go to the address or form in each company's privacy policy, and get tracked until the company confirms. It never sends anything on its own.",
+    "featured": true
   },
   {
     "id": "kb-islam",
@@ -511,6 +614,21 @@
     "color": "#F4A261",
     "glyph": "☀",
     "notes": "Claude reads today's and tomorrow's calendar, checks each email thread before flagging it so it never nags about something I already answered, and pulls fresh headlines with their sources. It only gathers and sends the one email."
+  },
+  {
+    "id": "lirr-watch",
+    "title": "LIRR commute watch",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every evening, a check of MTA and LIRR announcements for anything that changes my commute: new timetables, track work, subway reroutes, fare changes or strike news.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Web search"
+    ],
+    "schedule": "Every day",
+    "color": "#0E7C86",
+    "glyph": "!",
+    "notes": "Claude reads official MTA pages first and only uses news reports to find leads, labeling anything not yet confirmed. It reports only what's new in the last two days with the practical effect on my trip, and when nothing changed it sends a single line."
   },
   {
     "id": "unsubscribe-picks",
