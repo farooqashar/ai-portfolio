@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Name 'Em All — Map Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1424;
+    --bg-2: #131c31;
+    --card: #18233c;
+    --line: #26344f;
+    --text: #e8edf7;
+    --muted: #8d9bb8;
+    --accent: #4fd1a5;
+    --gold: #f5c76a;
+    --miss: #ff7a7a;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(79,209,165,.12), transparent 60%),
+      radial-gradient(900px 500px at 110% 0%, rgba(245,199,106,.08), transparent 60%),
+      var(--bg);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1600px; margin: 0 auto; padding: 20px 28px 32px; }
+  .is-hidden { display: none !important; }
+  kbd {
+    font: 600 .8em Inter, system-ui, sans-serif; display: inline-block; min-width: 1.6em; text-align: center;
+    padding: 2px 6px; border-radius: 6px; background: var(--bg); border: 1px solid #3a4c70; color: var(--text);
+    box-shadow: 0 2px 0 #3a4c70;
+  }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), #2a8fd6); font-size: 24px; box-shadow: 0 6px 20px rgba(79,209,165,.25);
+  }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); margin: 0; letter-spacing: -.01em; }
+
+  .modes { display: flex; flex-wrap: wrap; gap: 6px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+  .modes button {
+    border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 600; font-size: .95rem;
+    padding: 8px 14px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .modes button[aria-pressed="true"] { background: var(--accent); color: #07121f; }
+  .modes button[aria-pressed="true"] kbd { background: #2fa37c; border-color: #2fa37c; color: #07121f; box-shadow: none; }
+
+  .prompt {
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px 24px;
+    background: rgba(19,28,49,.92); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 24px; margin-bottom: 16px; box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  }
+  .answer { font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.6rem); line-height: 1.1; min-height: 1.2em; }
+  .answer.hit { color: var(--accent); }
+  .answer.miss { color: var(--miss); }
+  .answer.end { color: var(--gold); }
+  .hint { grid-column: 1 / -1; color: var(--muted); font-size: 1.05rem; margin-top: -8px; }
+
+  .stats { display: flex; gap: 10px; }
+  .stat { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 8px 16px; text-align: center; min-width: 96px; }
+  .stat b { display: block; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+  .btn {
+    font: inherit; font-weight: 600; font-size: 1rem; border-radius: 10px; padding: 10px 16px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--text); display: inline-flex; align-items: center; gap: 8px;
+    transition: background .2s, border-color .2s;
+  }
+  .btn:hover { border-color: #3a4c70; background: #1d2a47; }
+  .btn.primary { background: var(--accent); color: #07121f; border-color: var(--accent); }
+  .btn.primary:hover { background: #3bb88e; }
+  .btn.danger:hover { border-color: var(--miss); color: var(--miss); }
+  .btn kbd { font-size: .75em; }
+
+  .map-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; }
+  #map { width: 100%; height: 72vh; min-height: 440px; display: block; cursor: grab; touch-action: none; }
+  #map:active { cursor: grabbing; }
+  #map path { fill: #1d2a47; stroke: #33435f; stroke-width: .4; transition: fill .3s; }
+  #map path.off { fill: #111a2d; }
+  #map path.found { fill: #2fa37c; }
+  #map path.missed { fill: #c94f4f; }
+  #map path.current { fill: var(--gold); stroke: #fff; stroke-width: 1.2; }
+  .map-label { font: 700 12px Inter, system-ui, sans-serif; fill: #fff; stroke: #07121f; stroke-width: 3px; paint-order: stroke; text-anchor: middle; pointer-events: none; }
+  .map-label.miss { fill: #ffc4c4; }
+  .map-status { font: 600 16px Inter, system-ui, sans-serif; fill: var(--muted); text-anchor: middle; }
+  .off-note { margin: 8px 4px 0; color: var(--muted); font-size: .9rem; min-height: 1.2em; }
+
+  .keys { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; margin-top: 14px; color: var(--muted); font-size: .92rem; }
+  .keys .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+  .keys .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .keys .legend span { white-space: nowrap; }
+
+  .banner { margin-top: 14px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+  @media (max-width: 900px) {
+    .prompt { grid-template-columns: 1fr; }
+    .stats { justify-content: space-between; }
+    .stat { flex: 1; min-width: 0; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🌍</div>
+      <h1>Name 'Em All</h1>
+    </div>
+    <nav class="modes" role="group" aria-label="Game mode">
+      <button type="button" tabindex="-1" data-mode="world-all" aria-pressed="false"><kbd>1</kbd> World · all</button>
+      <button type="button" tabindex="-1" data-mode="world-famous" aria-pressed="false"><kbd>2</kbd> World · famous</button>
+      <button type="button" tabindex="-1" data-mode="world-medium" aria-pressed="false"><kbd>3</kbd> World · medium</button>
+      <button type="button" tabindex="-1" data-mode="world-small" aria-pressed="false"><kbd>4</kbd> World · small &amp; fun</button>
+      <button type="button" tabindex="-1" data-mode="us" aria-pressed="false"><kbd>5</kbd> US states</button>
+    </nav>
+  </header>
+
+  <section class="prompt" aria-label="Current question">
+    <div class="answer" id="answer" aria-live="polite">Loading map…</div>
+    <div class="stats">
+      <div class="stat"><b id="score">0/0</b><span>Named</span></div>
+      <div class="stat"><b id="missed">0</b><span>Missed</span></div>
+      <div class="stat"><b id="timer">0:00</b><span>Time</span></div>
+    </div>
+    <div class="hint" id="hint"></div>
+  </section>
+
+  <section class="map-card" aria-label="Map">
+    <svg id="map" role="img" aria-label="World or US map. The gold area is the one to name."></svg>
+    <p class="off-note" id="offNote"></p>
+  </section>
+
+  <section class="keys">
+    <div class="legend">
+      <span><kbd>Enter</kbd> / <kbd>G</kbd> Got it</span>
+      <span><kbd>S</kbd> / <kbd>Space</kbd> Skip</span>
+      <span><kbd>Esc</kbd> Reveal &amp; end</span>
+      <span><kbd>R</kbd> Restart</span>
+      <span><kbd>+</kbd> / <kbd>−</kbd> Zoom</span>
+      <span><kbd>0</kbd> Reset zoom</span>
+    </div>
+    <div class="controls">
+      <button class="btn primary" id="gotIt" type="button">Got it <kbd>Enter</kbd></button>
+      <button class="btn" id="skip" type="button">Skip <kbd>S</kbd></button>
+      <button class="btn danger" id="endRound" type="button">End <kbd>Esc</kbd></button>
+      <button class="btn" id="restart" type="button">Restart <kbd>R</kbd></button>
+    </div>
+  </section>
+</div>
+
+<script>
+// ---- Data -------------------------------------------------------------
+// Each entry: "Display Name|alias|alias". Aliases are alternate names that the map also understands.
+const WORLD = {
+  "Africa": ["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde|Cape Verde","Cameroon",
+    "Central African Republic|CAR","Chad","Comoros","DR Congo|Democratic Republic of the Congo|Democratic Republic of Congo|DRC|Congo Kinshasa|Zaire",
+    "Republic of the Congo|Congo|Congo Brazzaville|Republic of Congo","Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini|Swaziland",
+    "Ethiopia","Gabon","Gambia|The Gambia","Ghana","Guinea","Guinea-Bissau","Ivory Coast|Cote d'Ivoire","Kenya","Lesotho","Liberia","Libya",
+    "Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda",
+    "São Tomé and Príncipe|Sao Tome|Sao Tome & Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan",
+    "Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"],
+  "Asia": ["Afghanistan","Armenia","Azerbaijan","Bahrain","Bangladesh","Bhutan","Brunei","Cambodia","China","Georgia","India","Indonesia",
+    "Iran","Iraq","Israel","Japan","Jordan","Kazakhstan","Kuwait","Kyrgyzstan","Laos","Lebanon","Malaysia","Maldives","Mongolia",
+    "Myanmar|Burma","Nepal","North Korea","Oman","Pakistan","Palestine","Philippines","Qatar","Saudi Arabia","Singapore","South Korea|Korea",
+    "Sri Lanka","Syria","Tajikistan","Thailand","Timor-Leste|East Timor","Turkey|Turkiye","Turkmenistan","United Arab Emirates|UAE",
+    "Uzbekistan","Vietnam|Viet Nam","Yemen"],
+  "Europe": ["Albania","Andorra","Austria","Belarus","Belgium","Bosnia and Herzegovina|Bosnia","Bulgaria","Croatia","Cyprus",
+    "Czechia|Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Italy","Latvia",
+    "Liechtenstein","Lithuania","Luxembourg","Malta","Moldova","Monaco","Montenegro","Netherlands|Holland|The Netherlands",
+    "North Macedonia|Macedonia","Norway","Poland","Portugal","Romania","Russia","San Marino","Serbia","Slovakia","Slovenia","Spain",
+    "Sweden","Switzerland","Ukraine","United Kingdom|UK|Great Britain|Britain","Vatican City|Vatican|Holy See"],
+  "North America": ["Antigua and Barbuda|Antigua","Bahamas|The Bahamas","Barbados","Belize","Canada","Costa Rica","Cuba","Dominica",
+    "Dominican Republic","El Salvador","Grenada","Guatemala","Haiti","Honduras","Jamaica","Mexico","Nicaragua","Panama",
+    "Saint Kitts and Nevis|St Kitts","Saint Lucia","Saint Vincent and the Grenadines|St Vincent","Trinidad and Tobago|Trinidad",
+    "United States|USA|US|United States of America|America"],
+  "South America": ["Argentina","Bolivia","Brazil","Chile","Colombia","Ecuador","Guyana","Paraguay","Peru","Suriname","Uruguay","Venezuela"],
+  "Oceania": ["Australia","Fiji","Kiribati","Marshall Islands","Micronesia","Nauru","New Zealand","Palau","Papua New Guinea|PNG",
+    "Samoa","Solomon Islands","Tonga","Tuvalu","Vanuatu"]
+};
+
+const US = {
+  "Northeast": ["Connecticut","Maine","Massachusetts","New Hampshire","New Jersey","New York","Pennsylvania","Rhode Island","Vermont"],
+  "Midwest": ["Illinois","Indiana","Iowa","Kansas","Michigan","Minnesota","Missouri","Nebraska","North Dakota","Ohio","South Dakota","Wisconsin"],
+  "South": ["Alabama","Arkansas","Delaware","Florida","Georgia","Kentucky","Louisiana","Maryland","Mississippi","North Carolina",
+    "Oklahoma","South Carolina","Tennessee","Texas","Virginia","West Virginia"],
+  "West": ["Alaska","Arizona","California","Colorado","Hawaii","Idaho","Montana","Nevada","New Mexico","Oregon","Utah","Washington","Wyoming"]
+};
+
+// World difficulty tiers. "Medium" is everything that is in neither of these two lists.
+const FAMOUS = new Set(["United States","Canada","Mexico","Brazil","Argentina","Chile","Colombia","Peru","Venezuela","Cuba","Jamaica",
+  "United Kingdom","Ireland","France","Germany","Italy","Spain","Portugal","Netherlands","Belgium","Switzerland","Austria","Greece",
+  "Turkey","Sweden","Norway","Poland","Ukraine","Russia","Egypt","Libya","Algeria","Morocco","Nigeria","Kenya","Ethiopia","South Africa",
+  "DR Congo","Saudi Arabia","Iran","Iraq","Israel","Afghanistan","Pakistan","India","China","Japan","South Korea","North Korea",
+  "Mongolia","Kazakhstan","Thailand","Vietnam","Indonesia","Philippines","Australia","New Zealand","Papua New Guinea"]);
+
+const SMALL = new Set(["Andorra","Antigua and Barbuda","Bahrain","Barbados","Brunei","Cabo Verde","Comoros","Dominica","Grenada",
+  "Kiribati","Liechtenstein","Luxembourg","Maldives","Malta","Marshall Islands","Mauritius","Micronesia","Monaco","Nauru","Palau",
+  "Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","São Tomé and Príncipe","Seychelles",
+  "Singapore","Tonga","Tuvalu","Vanuatu","Vatican City"]);
+
+// Each mode picks which map areas are in the quiz. Areas outside the pick are greyed out on the map.
+const MODES = {
+  "world-all":    { geo: "world", label: "World · all",       pick: () => true },
+  "world-famous": { geo: "world", label: "World · famous",    pick: c => FAMOUS.has(c.name) },
+  "world-medium": { geo: "world", label: "World · medium",    pick: c => !FAMOUS.has(c.name) && !SMALL.has(c.name) },
+  "world-small":  { geo: "world", label: "World · small & fun", pick: c => SMALL.has(c.name) },
+  "us":           { geo: "us",    label: "US states",         pick: () => true }
+};
+const MODE_KEYS = ["world-all", "world-famous", "world-medium", "world-small", "us"];
+
+// ---- Helpers ----------------------------------------------------------
+// Loose matching: case, accents, punctuation, "the", "&" and "St." all forgiven.
+function norm(s) {
+  return s.toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/\bst\.?\s/g, "saint ")
+    .replace(/[^a-z0-9 ]/g, " ")
+    .replace(/^the\s+/, "")
+    .replace(/\s+/g, " ").trim();
+}
+
+function flatten(groups) {
+  return Object.values(groups).flat().map(raw => {
+    const [name, ...aliases] = raw.split("|");
+    return { name, aliases: [name, ...aliases], status: null, drawn: false, centroid: null, pathEl: null };
+  });
+}
+
+function fmt(ms) {
+  const s = Math.floor(ms / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+}
+
+const $ = id => document.getElementById(id);
+const els = {
+  answer: $("answer"), hint: $("hint"), score: $("score"), missed: $("missed"), timer: $("timer"), offNote: $("offNote")
+};
+
+// ---- Map data ---------------------------------------------------------
+// Natural Earth countries (world) and Census states (US), drawn from a CDN as TopoJSON.
+const GEO = {
+  world: { url: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json", object: "countries", w: 960, h: 480, projection: () => d3.geoNaturalEarth1() },
+  us:    { url: "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json", object: "states", w: 960, h: 600, projection: () => d3.geoAlbersUsa() }
+};
+// Map-file names that differ from our answer names.
+const GEO_NAME_FIX = {
+  "Dem. Rep. Congo": "DR Congo", "Central African Rep.": "Central African Republic", "Bosnia and Herz.": "Bosnia and Herzegovina",
+  "Eq. Guinea": "Equatorial Guinea", "S. Sudan": "South Sudan", "Solomon Is.": "Solomon Islands", "Dominican Rep.": "Dominican Republic",
+  "Dem. Rep. Korea": "North Korea", "Korea": "South Korea", "Lao PDR": "Laos", "Macedonia": "North Macedonia", "Vatican": "Vatican City",
+  "Antigua and Barb.": "Antigua and Barbuda", "St. Vin. and Gren.": "Saint Vincent and the Grenadines", "Marshall Is.": "Marshall Islands"
+};
+const geoCache = {};
+
+function loadGeo(geo) {
+  if (!geoCache[geo]) {
+    geoCache[geo] = fetch(GEO[geo].url)
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(topo => topojson.feature(topo, topo.objects[GEO[geo].object]).features
+        .filter(f => f.properties.name !== "Antarctica"));
+  }
+  return geoCache[geo];
+}
+
+// ---- State (in memory only) -------------------------------------------
+let state;
+
+function newGame(key) {
+  clearInterval(state?.tick);
+  const mode = MODES[key];
+  const geoItems = flatten(mode.geo === "world" ? WORLD : US);
+  const lookup = new Map();
+  geoItems.forEach(it => it.aliases.forEach(a => lookup.set(norm(a), it)));
+  state = {
+    key, mode, geoItems, lookup, items: geoItems.filter(mode.pick),
+    current: null, svg: null, g: null, zoom: null, loaded: false,
+    start: null, elapsed: 0, tick: null, over: false
+  };
+
+  document.querySelectorAll("[data-mode]").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode === key));
+  els.answer.className = "answer";
+  els.answer.textContent = "Loading map…";
+  els.hint.textContent = "";
+  updateStats();
+  renderMap();
+}
+
+function renderMap() {
+  const game = state, cfg = GEO[game.mode.geo];
+  const svg = d3.select("#map");
+  svg.attr("viewBox", `0 0 ${cfg.w} ${cfg.h}`).selectAll("*").remove();
+  game.svg = svg;
+  loadGeo(game.mode.geo).then(features => {
+    if (state !== game) return; // a new game or mode started while loading
+    const path = d3.geoPath(cfg.projection().fitSize([cfg.w, cfg.h], { type: "FeatureCollection", features }));
+    const g = svg.append("g");
+    game.g = g;
+    game.zoom = d3.zoom().scaleExtent([1, 14]).on("zoom", e => g.attr("transform", e.transform));
+    svg.call(game.zoom);
+    g.selectAll("path").data(features).join("path").attr("d", path)
+      .each(function (f) {
+        const item = game.lookup.get(norm(GEO_NAME_FIX[f.properties.name] || f.properties.name)) || null;
+        if (item) { item.pathEl = this; item.centroid = path.centroid(f); }
+      });
+    game.geoItems.forEach(it => { it.drawn = Boolean(it.pathEl); });
+    game.loaded = true;
+    if (!pickCurrent()) finish();
+    else els.answer.textContent = "Name the gold country";
+    els.hint.textContent = "Got it when someone names it · Skip to reveal it · Esc ends the round";
+    updateStats();
+  }).catch(() => {
+    if (state !== game) return;
+    svg.selectAll("*").remove();
+    svg.append("text").attr("class", "map-status").attr("x", cfg.w / 2).attr("y", cfg.h / 2).text("Map couldn't load. Check the internet connection and press R.");
+    els.answer.textContent = "Map couldn't load";
+  });
+}
+
+// Highlight one unanswered, drawable area at random. Returns false when nothing is left.
+function pickCurrent() {
+  const pool = state.items.filter(i => i.drawn && !i.status);
+  state.current = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+  paintMap();
+  return Boolean(state.current);
+}
+
+// Colour the map from game state. Areas outside this mode are greyed out.
+function paintMap() {
+  const game = state;
+  if (!game.g) return;
+  game.g.selectAll("path").attr("class", "off");
+  game.items.forEach(it => {
+    if (!it.pathEl) return;
+    it.pathEl.setAttribute("class",
+      it.status === "found" ? "found" : it.status === "missed" ? "missed" : it === game.current ? "current" : "");
+  });
+}
+
+// Write the answer on the map itself, so the whole room can read it.
+function labelOn(item) {
+  if (!item.centroid || !state.g) return;
+  state.g.append("text")
+    .attr("class", item.status === "missed" ? "map-label miss" : "map-label")
+    .attr("x", item.centroid[0]).attr("y", item.centroid[1]).text(item.name);
+}
+
+function updateStats() {
+  const game = state;
+  const drawn = game.items.filter(i => i.drawn);
+  const found = drawn.filter(i => i.status === "found").length;
+  const missed = drawn.filter(i => i.status === "missed").length;
+  els.score.textContent = `${found}/${drawn.length}`;
+  els.missed.textContent = missed;
+  els.timer.textContent = fmt(game.elapsed);
+  const unmapped = game.loaded ? game.items.filter(i => !i.drawn).map(i => i.name) : [];
+  els.offNote.textContent = unmapped.length ? `Too small to draw, so not in the quiz: ${unmapped.join(", ")}` : "";
+}
+
+function startTimer() {
+  if (state.start) return;
+  state.start = Date.now();
+  state.tick = setInterval(() => { state.elapsed = Date.now() - state.start; updateStats(); }, 250);
+}
+
+// ---- Answering --------------------------------------------------------
+// "Got it" credits the highlighted area, "Skip" reveals it in red. Either way the answer is written on the map.
+function resolve(found) {
+  const game = state, item = game.current;
+  if (!item || game.over) return;
+  startTimer();
+  item.status = found ? "found" : "missed";
+  labelOn(item);
+  const answer = found ? `✓ ${item.name}` : `It was ${item.name}`;
+  const cls = found ? "hit" : "miss";
+  if (pickCurrent()) {
+    els.answer.className = `answer ${cls}`;
+    els.answer.textContent = answer;
+    els.hint.textContent = "Next: name the gold country";
+  } else {
+    finish();
+  }
+  updateStats();
+}
+
+// Ends the round: anything still unanswered is revealed in red.
+function finish() {
+  const game = state;
+  if (game.over) return;
+  game.over = true;
+  game.current = null;
+  clearInterval(game.tick);
+  if (game.start) game.elapsed = Date.now() - game.start;
+  game.items.forEach(it => {
+    if (it.drawn && !it.status) { it.status = "missed"; labelOn(it); }
+  });
+  paintMap();
+  updateStats();
+
+  const total = game.items.filter(i => i.drawn).length;
+  const found = game.items.filter(i => i.status === "found").length;
+  const missed = total - found;
+  const noun = game.mode.geo === "us" ? "states" : "countries";
+  if (total && missed === 0) {
+    els.answer.className = "answer end";
+    els.answer.textContent = `🏆 All ${total} ${noun}!`;
+    els.hint.textContent = `Finished in ${fmt(game.elapsed)} · press R to play again`;
+  } else {
+    els.answer.className = "answer end";
+    els.answer.textContent = `${found} of ${total} ${noun}`;
+    els.hint.textContent = `${missed} missed, shown in red · ${fmt(game.elapsed)} · press R to play again`;
+  }
+}
+
+// ---- Mode and restart -------------------------------------------------
+function progressMade() {
+  return state && !state.over && state.items.some(i => i.status);
+}
+
+function switchMode(key) {
+  if (key === state.key && !state.over) return;
+  if (progressMade() && !confirm("Switch modes? The current round will be lost.")) return;
+  newGame(key);
+}
+
+function restart() {
+  if (progressMade() && !confirm("Restart? The current round will be lost.")) return;
+  newGame(state.key);
+}
+
+// Zoom: + and - step in and out, 0 resets. Lets the room see tiny countries on a big screen.
+function zoomBy(k) {
+  const game = state;
+  if (!game.zoom) return;
+  if (k === 0) game.svg.transition().duration(300).call(game.zoom.transform, d3.zoomIdentity);
+  else game.svg.transition().duration(250).call(game.zoom.scaleBy, k);
+}
+
+// ---- Wiring -----------------------------------------------------------
+// Keyboard-first: the room's host runs the whole game from the keys. Buttons are for mouse use only.
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (k === "enter" || k === "g") { e.preventDefault(); resolve(true); }
+  else if (k === "s" || k === " ") { e.preventDefault(); resolve(false); }
+  else if (k === "escape") finish();
+  else if (k === "r") restart();
+  else if (k === "+" || k === "=") zoomBy(1.6);
+  else if (k === "-" || k === "_") zoomBy(1 / 1.6);
+  else if (k === "0") zoomBy(0);
+  else if (/^[1-5]$/.test(k)) switchMode(MODE_KEYS[Number(k) - 1]);
+});
+$("gotIt").addEventListener("click", () => resolve(true));
+$("skip").addEventListener("click", () => resolve(false));
+$("endRound").addEventListener("click", finish);
+$("restart").addEventListener("click", restart);
+document.querySelectorAll("[data-mode]").forEach(b => b.addEventListener("click", () => switchMode(b.dataset.mode)));
+
+newGame("world-all");
+</script>
+
+<a class="home-link" href="/" style="position:fixed;right:16px;bottom:16px;z-index:9999;padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">More things I made with AI</a>
+</body>
+</html>
