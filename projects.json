@@ -285,7 +285,8 @@
     "url": "/p/map-quiz/",
     "color": "#2A8FD6",
     "glyph": "◍",
-    "notes": "Generated with AI as a single HTML file that draws Natural Earth and Census maps with D3. Five modes: every country, famous, medium, small and fun, or the 50 states. Answers are written on the map so the whole room can read them, with a timer, zoom for tiny countries, and keyboard controls for whoever's hosting."
+    "notes": "Generated with AI as a single HTML file that draws Natural Earth and Census maps with D3. Five modes: every country, famous, medium, small and fun, or the 50 states. Answers are written on the map so the whole room can read them, with a timer, zoom for tiny countries, and keyboard controls for whoever's hosting.",
+    "featured": true
   },
   {
     "id": "habitarie",
@@ -303,23 +304,6 @@
     "color": "#58A55C",
     "glyph": "H",
     "notes": "Generated with AI as a single-page app with no backend: a daily calorie goal with protein, carbs and fat, a food log, and a habit checklist."
-  },
-  {
-    "id": "party-invite",
-    "title": "Birthday party invitation",
-    "kind": "Website",
-    "year": 2026,
-    "summary": "A playful invitation page for a birthday party, with the event details and an RSVP form. Sample event.",
-    "builtWith": [
-      "AI-generated",
-      "HTML",
-      "GitHub Pages"
-    ],
-    "url": "https://farooqashar.github.io/birthday-party-website/",
-    "repo": "https://github.com/farooqashar/birthday-party-website",
-    "color": "#B5179E",
-    "glyph": "P",
-    "notes": "Generated with AI as a reusable template: swap in the name, date and venue and it's ready to send."
   },
   {
     "id": "ashar-mcp",
