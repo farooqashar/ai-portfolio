@@ -113,7 +113,8 @@ a { color: inherit; }
   gap: 18px;
 }
 .grid > li.featured { grid-column: span 2; }
-@media (max-width: 620px) { .grid > li.featured { grid-column: auto; } }
+/* Up to 847px the grid has at most 2 columns, where a span would fill the whole row */
+@media (max-width: 847px) { .grid > li.featured { grid-column: auto; } }
 
 .card {
   all: unset;
@@ -135,6 +136,7 @@ a { color: inherit; }
   aspect-ratio: 16 / 9;
   background: var(--c);
   overflow: hidden;
+  container-type: inline-size;
 }
 .featured .cover { aspect-ratio: 21 / 9; }
 .cover .glyph {
@@ -148,6 +150,7 @@ a { color: inherit; }
   color: rgba(255,255,255,.92);
   transition: transform .45s cubic-bezier(.2,.8,.2,1);
 }
+.featured .cover .glyph { font-size: clamp(9rem, max(18vw, 39.6cqw), 15rem); }
 .card:hover .glyph { transform: translateY(-6px) rotate(-3deg); }
 .cover .kind {
   position: absolute;
