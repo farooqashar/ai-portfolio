@@ -156,6 +156,25 @@
     "notes": "I wanted a free way to play with open image models. Claude built it as a single HTML file on a free Static Space: the page calls Hugging Face's model Spaces (FLUX.1 Krea, Qwen-Image, FLUX.1 schnell, and FLUX.1 Kontext for photo edits) straight from the browser with Gradio's JavaScript client. Each visitor pastes their own Hugging Face token, kept only in their browser, so images come out of their own free GPU allowance (about 3 a day), not mine."
   },
   {
+    "id": "tried-stack-tools",
+    "title": "What's on my radar",
+    "kind": "Website",
+    "year": 2026,
+    "featured": true,
+    "summary": "Every AI tool, model and platform I've tried, plus the ones on my list to try, drawn as a radar: tried tools on the inner ring, the rest on the outer ring. Below it is a searchable list with my notes.",
+    "builtWith": [
+      "Claude",
+      "Astro",
+      "Render",
+      "Google Docs"
+    ],
+    "url": "https://tried-stack-tools.onrender.com",
+    "repo": "https://github.com/farooqashar/tried-stack-tools",
+    "color": "#2A52D6",
+    "glyph": "◎",
+    "notes": "I keep the list in a public Google Doc. Each Render build downloads the Doc as Markdown, reads the table, sorts every tool into a category and builds a static Astro site, so after editing the Doc I just click Deploy. The cleaned list is also published as JSON for other sites to reuse."
+  },
+  {
     "id": "mini-football",
     "title": "Mini Football",
     "kind": "Website",
