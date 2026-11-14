@@ -114,6 +114,7 @@ a { color: inherit; }
 }
 .grid > li.featured { grid-column: span 2; }
 @media (max-width: 620px) { .grid > li.featured { grid-column: auto; } }
+.grid > li.fill { grid-column: span var(--span); }
 
 .card {
   all: unset;
@@ -136,7 +137,7 @@ a { color: inherit; }
   background: var(--c);
   overflow: hidden;
 }
-.featured .cover { aspect-ratio: 21 / 9; }
+.featured .cover, .fill .cover { aspect-ratio: 21 / 9; }
 .cover .glyph {
   position: absolute;
   right: -0.06em;
