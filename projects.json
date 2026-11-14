@@ -138,6 +138,24 @@
     "notes": "I clip pages into my Obsidian vault, which syncs to GitHub. A GitHub Action in the vault pings a Netlify build hook, and the build reads every clipping's metadata and writes the shelf, a JSON file and the feed. Only titles, links, tags and dates are published; the article text stays in the vault."
   },
   {
+    "id": "image-chat",
+    "title": "Image Chat",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A chat that turns descriptions into images with free open-source models on Hugging Face. Reply to tweak the last image, or upload a photo and say how to change it.",
+    "builtWith": [
+      "Claude",
+      "Hugging Face Spaces",
+      "FLUX",
+      "Qwen-Image"
+    ],
+    "url": "https://farooqashar-image-chat.static.hf.space",
+    "repo": "https://huggingface.co/spaces/farooqashar/image-chat/tree/main",
+    "color": "#0F7B6C",
+    "glyph": "I",
+    "notes": "I wanted a free way to play with open image models. Claude built it as a single HTML file on a free Static Space: the page calls Hugging Face's model Spaces (FLUX.1 Krea, Qwen-Image, FLUX.1 schnell, and FLUX.1 Kontext for photo edits) straight from the browser with Gradio's JavaScript client. Each visitor pastes their own Hugging Face token, kept only in their browser, so images come out of their own free GPU allowance (about 3 a day), not mine."
+  },
+  {
     "id": "mini-football",
     "title": "Mini Football",
     "kind": "Website",
