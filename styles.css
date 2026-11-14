@@ -115,6 +115,7 @@ a { color: inherit; }
 .grid > li.featured { grid-column: span 2; }
 /* Up to 847px the grid has at most 2 columns, where a span would fill the whole row */
 @media (max-width: 847px) { .grid > li.featured { grid-column: auto; } }
+.grid > li.fill { grid-column: span var(--span); }
 
 .card {
   all: unset;
@@ -138,7 +139,7 @@ a { color: inherit; }
   overflow: hidden;
   container-type: inline-size;
 }
-.featured .cover { aspect-ratio: 21 / 9; }
+.featured .cover, .fill .cover { aspect-ratio: 21 / 9; }
 .cover .glyph {
   position: absolute;
   right: -0.06em;
@@ -233,4 +234,50 @@ dialog[open] { animation: rise .28s cubic-bezier(.2,.8,.2,1); }
   .wide .cover { aspect-ratio: auto; width: 40%; min-height: 200px; }
   .wide .card-body { justify-content: center; padding: 28px 32px; }
   .wide .card p { max-width: 36em; }
+}
+
+/* Phones: one scrolling row of filters and compact cards with a small color tile */
+@media (max-width: 620px) {
+  #filter-group {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: -6px -16px;
+    padding: 6px 16px;
+  }
+  #filter-group::-webkit-scrollbar { display: none; }
+  .chip { flex-shrink: 0; }
+
+  .grid { gap: 12px; }
+  .card { flex-direction: row; align-items: flex-start; position: relative; border-radius: 18px; }
+  .cover, .featured .cover {
+    position: static;
+    flex: 0 0 72px;
+    aspect-ratio: 1;
+    margin: 14px 0 14px 14px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover .glyph, .featured .cover .glyph { position: static; font-size: 3rem; }
+  .card:hover .glyph { transform: none; }
+  .cover .kind {
+    left: 100px;
+    top: 14px;
+    padding: 0;
+    background: none;
+    right: 16px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Room for the one-line kind label above the title, in rem so it grows with text size */
+  .card-body { padding: calc(14px + 1.25rem) 16px 14px 14px; gap: 4px; min-width: 0; }
+  .card h2 { font-size: 1.2rem; }
+  .card p { font-size: 0.95rem; line-height: 1.4; }
+  .card .where { padding-top: 4px; font-size: .85rem; overflow-wrap: anywhere; }
 }

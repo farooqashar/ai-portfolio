@@ -77,7 +77,31 @@
         </button>
       </li>`;
     }).join("");
+    cols = 0;
+    if (curated) fillLastRow();
   }
+
+  // Stretch the last card of the curated grid so the row before the wide card ends flush
+  let cols = 0;
+  function fillLastRow() {
+    const tracks = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean);
+    if (tracks.length === cols) return;
+    cols = tracks.length;
+    const items = [...grid.children].filter((li) => !li.classList.contains("wide"));
+    items.forEach((li) => { li.classList.remove("fill"); li.style.removeProperty("--span"); });
+    if (cols < 2 || !items.length) return;
+    const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+    const step = parseFloat(tracks[0]) + gap;
+    const span = (li) => Math.round((li.offsetWidth + gap) / step);
+    const top = Math.max(...items.map((li) => li.offsetTop));
+    const row = items.filter((li) => li.offsetTop === top);
+    const left = cols - row.reduce((n, li) => n + span(li), 0);
+    if (left <= 0) return;
+    const last = row[row.length - 1];
+    last.style.setProperty("--span", span(last) + left);
+    last.classList.add("fill");
+  }
+  new ResizeObserver(() => { if (grid.querySelector(".wide")) fillLastRow(); }).observe(grid);
 
   grid.addEventListener("click", (e) => {
     const card = e.target.closest(".card");

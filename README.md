@@ -75,7 +75,7 @@ Then commit and push. Vercel redeploys on every push to `main`.
 | `url` | no | Live link. Use `/p/<slug>/` for hosted sites. |
 | `repo` | no | Source link, shown as "View code". |
 | `schedule` | no | For automations, e.g. "Every day" or "Weekly". |
-| `featured` | no | Makes the card twice as wide. |
+| `featured` | no | Makes the card twice as wide. Use sparingly: aim for 5 to 8 at a time, near the top of the file, so they read as the highlights. |
 | `wide` | no | Makes the card span the full row. Used for the last card. |
 
 On a wide screen the grid has four columns, and a featured card takes two. If cards and featured cards don't add up to a multiple of four, the last row comes out short, so balance them by featuring or unfeaturing a card.
