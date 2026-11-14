@@ -97,15 +97,13 @@
     "url": "/p/ai-startup-atlas/",
     "color": "#6D4AFF",
     "glyph": "A",
-    "notes": "Generated with AI as a two-file static site: the page and a data file of 227 companies with founding year, HQ, region and tags. Search by name, tag or city, filter by field and region, sort by age, bookmark favorites for the session, and open any company for details. Press / to jump to search.",
-    "featured": true
+    "notes": "Generated with AI as a two-file static site: the page and a data file of 227 companies with founding year, HQ, region and tags. Search by name, tag or city, filter by field and region, sort by age, bookmark favorites for the session, and open any company for details. Press / to jump to search."
   },
   {
     "id": "lirr-live",
     "title": "LIRR Live",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "Live Long Island Rail Road departures with track numbers, including the expected track before it's posted and track changes. Built for checking the next train from Huntington, Penn or Grand Central.",
     "builtWith": [
       "Claude",
@@ -123,7 +121,6 @@
     "title": "Reading Shelf",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "Everything I've been reading, as a bookshelf with one spine per article, plus a searchable reading log and an RSS feed. It updates itself whenever I clip something new.",
     "builtWith": [
       "Claude",
@@ -160,7 +157,6 @@
     "title": "What's on my radar",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "Every AI tool, model and platform I've tried, plus the ones on my list to try, drawn as a radar: tried tools on the inner ring, the rest on the outer ring. Below it is a searchable list with my notes.",
     "builtWith": [
       "Claude",
@@ -188,8 +184,7 @@
     "url": "/p/mini-football/",
     "color": "#2F8F46",
     "glyph": "⚽",
-    "notes": "Generated with AI as a single HTML file with no dependencies. The pitch is drawn on a canvas with real ball physics: tap to pass, hold to power up a shot, and dribble by pushing the ball. It has CPU goalkeepers and a CPU striker for solo play, a match clock with golden goal on a tie, and sound effects synthesized in the browser.",
-    "featured": true
+    "notes": "Generated with AI as a single HTML file with no dependencies. The pitch is drawn on a canvas with real ball physics: tap to pass, hold to power up a shot, and dribble by pushing the ball. It has CPU goalkeepers and a CPU striker for solo play, a match clock with golden goal on a tie, and sound effects synthesized in the browser."
   },
   {
     "id": "knicks-central",
@@ -206,8 +201,7 @@
     "repo": "https://github.com/farooqashar/hoopzone",
     "color": "#F58426",
     "glyph": "K",
-    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed.",
-    "featured": true
+    "notes": "Started as HoopZone, a general basketball scores site, and was reworked around the Knicks. It runs on mock data, so it's a design and layout piece rather than a live feed."
   },
   {
     "id": "ashar-chatbot",
@@ -305,8 +299,7 @@
     "url": "/p/flag-night/",
     "color": "#C8102E",
     "glyph": "⚑",
-    "notes": "Generated with AI as a single HTML file, made for putting on a projector. There are three decks: 28 well-known flags, 34 unusual ones like Nepal's pennants, Bhutan's dragon and Mozambique's rifle, or both shuffled together. Two levels of hints, a fun fact on every reveal, a running score, and a list of the ones that got away at the end. The host runs it all from the keyboard. Flags load from flagcdn.",
-    "featured": true
+    "notes": "Generated with AI as a single HTML file, made for putting on a projector. There are three decks: 28 well-known flags, 34 unusual ones like Nepal's pennants, Bhutan's dragon and Mozambique's rifle, or both shuffled together. Two levels of hints, a fun fact on every reveal, a running score, and a list of the ones that got away at the end. The host runs it all from the keyboard. Flags load from flagcdn."
   },
   {
     "id": "map-quiz",
@@ -322,8 +315,7 @@
     "url": "/p/map-quiz/",
     "color": "#2A8FD6",
     "glyph": "◍",
-    "notes": "Generated with AI as a single HTML file that draws Natural Earth and Census maps with D3. Five modes: every country, famous, medium, small and fun, or the 50 states. Answers are written on the map so the whole room can read them, with a timer, zoom for tiny countries, and keyboard controls for whoever's hosting.",
-    "featured": true
+    "notes": "Generated with AI as a single HTML file that draws Natural Earth and Census maps with D3. Five modes: every country, famous, medium, small and fun, or the 50 states. Answers are written on the map so the whole room can read them, with a timer, zoom for tiny countries, and keyboard controls for whoever's hosting."
   },
   {
     "id": "habitarie",
@@ -347,7 +339,6 @@
     "title": "My personal MCP server",
     "kind": "Tool",
     "year": 2026,
-    "featured": true,
     "summary": "An MCP server that lets Claude, or any AI assistant, answer questions about my trips, travel trackers and Things Done timeline.",
     "builtWith": [
       "Python",
@@ -364,7 +355,6 @@
     "title": "Ashistant Discord bot",
     "kind": "Tool",
     "year": 2026,
-    "featured": true,
     "summary": "An AI bot for my Discord server with a dozen slash commands: /ask, /tldr, /research, /event, /remind, /food, /summarize, /vibe-check, /trivia and more.",
     "builtWith": [
       "Claude",
@@ -436,8 +426,7 @@
     ],
     "color": "#B23A48",
     "glyph": "✕",
-    "notes": "It builds an inventory of companies with the evidence, the data each likely holds and a recommended action, and waits for my say before doing anything. Requests cite a privacy law only where one actually applies, go to the address or form in each company's privacy policy, and get tracked until the company confirms. It never sends anything on its own.",
-    "featured": true
+    "notes": "It builds an inventory of companies with the evidence, the data each likely holds and a recommended action, and waits for my say before doing anything. Requests cite a privacy law only where one actually applies, go to the address or form in each company's privacy policy, and get tracked until the company confirms. It never sends anything on its own."
   },
   {
     "id": "kb-islam",
