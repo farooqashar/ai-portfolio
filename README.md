@@ -94,6 +94,6 @@ The repo is a Vercel project with no framework and no build command, deploying f
 
 ## Changelog
 
-Releases are cut monthly and listed on the repo's [Releases](https://github.com/farooqashar/ai-portfolio/releases) page. The site has no version number, so tags use the year and month: `v2026.11` is the release for November 2026. On the 1st of each month, `.github/workflows/monthly-release.yml` tags the previous month with notes generated from the PRs merged since the last release. It does nothing if that month is already released or no PRs were merged.
+Releases are cut monthly and listed on the repo's [Releases](https://github.com/farooqashar/ai-portfolio/releases) page. The site has no version number, so tags use the year and month: `v2026.11` is the release for November 2026. On the 1st of each month, `.github/workflows/monthly-release.yml` releases the previous month with notes generated from the PRs merged since the last release. It does nothing if no PRs were merged since the last release.
 
-For an off-cycle release, run the **Monthly release** workflow manually from the Actions tab.
+For an off-cycle release, run the **Monthly release** workflow manually from the Actions tab. A manual run releases the current month, so a run on November 20 tags `v2026.11`. If the month already has a release, the tag gets a suffix and the title says which update it is: `v2026.11.1` is "November 2026 (update 1)", then `v2026.11.2`, and so on.
