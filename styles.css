@@ -263,10 +263,16 @@ dialog[open] { animation: rise .28s cubic-bezier(.2,.8,.2,1); }
     top: 14px;
     padding: 0;
     background: none;
+    right: 16px;
     color: var(--muted);
     font-size: 0.8rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .card-body { padding: 34px 16px 14px 14px; gap: 4px; min-width: 0; }
+  /* Room for the one-line kind label above the title, in rem so it grows with text size */
+  .card-body { padding: calc(14px + 1.25rem) 16px 14px 14px; gap: 4px; min-width: 0; }
   .card h2 { font-size: 1.2rem; }
   .card p { font-size: 0.95rem; line-height: 1.4; }
   .card .where { padding-top: 4px; font-size: .85rem; overflow-wrap: anywhere; }
