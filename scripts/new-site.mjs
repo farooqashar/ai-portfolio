@@ -31,13 +31,17 @@ const projectsFile = path.join(root, "projects.json");
 const projects = JSON.parse(fs.readFileSync(projectsFile, "utf8"));
 if (projects.some((p) => p.id === slug)) fail(`projects.json already has an entry with id "${slug}".`);
 
+// Check --from before creating anything, so a bad path leaves no empty p/<slug>/ behind
+const src = from ? path.resolve(from) : null;
+if (src) {
+  if (!fs.existsSync(src)) fail(`Nothing found at ${from}.`);
+  if (fs.statSync(src).isDirectory() && !fs.existsSync(path.join(src, "index.html"))) fail(`${from} has no index.html.`);
+}
+
 fs.mkdirSync(dest, { recursive: true });
 
-if (from) {
-  const src = path.resolve(from);
-  if (!fs.existsSync(src)) fail(`Nothing found at ${from}.`);
+if (src) {
   if (fs.statSync(src).isDirectory()) {
-    if (!fs.existsSync(path.join(src, "index.html"))) fail(`${from} has no index.html.`);
     fs.cpSync(src, dest, { recursive: true });
   } else {
     fs.copyFileSync(src, path.join(dest, "index.html"));
