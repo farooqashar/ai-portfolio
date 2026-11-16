@@ -335,6 +335,56 @@
     "notes": "Generated with AI as a single-page app with no backend: a daily calorie goal with protein, carbs and fat, a food log, and a habit checklist."
   },
   {
+    "id": "fright-fit",
+    "title": "Fright Fit costume try-on",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "Try on Halloween costumes before you commit: mix outfits, headwear and props, save your favorite looks, then send friends a link to vote on the winner.",
+    "builtWith": [
+      "AI-generated",
+      "Bun",
+      "SQLite"
+    ],
+    "url": "https://ashar-farooq-costume-try-on-vote-446.artifacts.sant.ai",
+    "color": "#E8772E",
+    "glyph": "🎃",
+    "notes": "Generated with AI as a small Bun app with a SQLite database. The costume is drawn from layered parts you swap with one tap, or hit Surprise me for a random look. Pick 2 to 4 saved looks and share one link: each friend gets one vote they can change, the tally stays hidden until they've voted so early results don't sway anyone, and you close the vote to crown a winner. There's no sign-up; each browser gets its own random id."
+  },
+  {
+    "id": "microlearn",
+    "title": "MicroLearn",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "Five-minute tech lessons in JavaScript, Git and Python for data, each with code examples and a short quiz, plus XP, daily streaks, badges and a leaderboard.",
+    "builtWith": [
+      "AI-generated",
+      "Bun",
+      "Hono",
+      "SQLite"
+    ],
+    "url": "https://shrubs-smoking-salad-referable.artifacts.sant.ai",
+    "color": "#6366F1",
+    "glyph": "⚡",
+    "notes": "Generated with AI as a Hono app on Bun with SQLite: 13 lessons across three courses, each with a takeaway and a quiz that explains every answer. Accounts use salted scrypt password hashes and HTTP-only session cookies. A later AI code review fixed streaks that never counted, a session-expiry mismatch and an unescaped leaderboard, and added inline code formatting to the lessons."
+  },
+  {
+    "id": "passenger-log",
+    "title": "The Passenger Log",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A guestbook for everyone who rides in my car: leave a note, say which seat you had and sign with your finger.",
+    "builtWith": [
+      "AI-generated",
+      "Bun",
+      "SQLite",
+      "Canvas"
+    ],
+    "url": "https://spindle-landmine-grandma-flashily.artifacts.sant.ai",
+    "color": "#14213D",
+    "glyph": "✎",
+    "notes": "Generated with AI as a Bun app with a SQLite database. Passengers draw their signature on a canvas pad, which is cropped to the ink before saving, and every entry becomes a numbered card in a searchable log with running counts of passengers and shotgun calls. A simple throttle stops anyone signing more than once every few seconds."
+  },
+  {
     "id": "ashar-mcp",
     "title": "My personal MCP server",
     "kind": "Tool",
@@ -670,6 +720,23 @@
     "color": "#E76F51",
     "glyph": "$",
     "notes": "A Python workflow that searches several deal sources, keeps the ones that are actually free or close to it, and sends one digest at 8 AM."
+  },
+  {
+    "id": "spam-check",
+    "title": "Daily spam check",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every morning, AI checks both sides of the Gmail spam filter: real mail caught as spam goes back to the inbox, and spam that slipped into the inbox gets labeled for review.",
+    "builtWith": [
+      "AI-generated",
+      "Workflow",
+      "Gmail"
+    ],
+    "url": "https://hub.sant.ai/base/165",
+    "schedule": "Every day",
+    "color": "#5C6B73",
+    "glyph": "⛨",
+    "notes": "A multi-step workflow: it reads each email in the spam folder and asks AI whether it's genuine spam, moving legitimate mail back to the inbox labeled Not Spam and tagging the rest Confirmed Spam. A second pass scans the inbox for spam that got through and only labels it, so nothing there is moved or deleted."
   },
   {
     "id": "gmail-labels",
