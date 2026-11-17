@@ -453,6 +453,23 @@
     "notes": "Packaged as ashar-cli with the command ashar. Your stations are saved privately in your own config file, never in the package. Tests run in CI, and tagging a release publishes to PyPI through GitHub Actions."
   },
   {
+    "id": "goto-links",
+    "title": "goto links",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "Short, memorable links to my profiles: goto.asharfarooq.xyz/linkedin, /gh, /ig, /resume and more.",
+    "builtWith": [
+      "Claude",
+      "Vercel",
+      "Gen.xyz DNS"
+    ],
+    "url": "https://goto.asharfarooq.xyz",
+    "repo": "https://github.com/farooqashar/goto-links",
+    "color": "#0A9396",
+    "glyph": "↗",
+    "notes": "The whole thing is one vercel.json file of redirects, with no app and no build step. Claude pulled my profile links from my personal site, wrote the redirects and pushed the repo; I imported it into Vercel and pointed a goto CNAME at it from Gen.xyz. The redirects are temporary (307) so I can change where a link points without browsers caching the old one, and any unknown path falls through to my main site. Adding a link is one line and a push."
+  },
+  {
     "id": "agent-travel",
     "title": "Travel Agent",
     "kind": "Agent",
