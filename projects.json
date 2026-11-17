@@ -398,7 +398,26 @@
     "repo": "https://github.com/farooqashar/ashar-mcp",
     "color": "#1D3557",
     "glyph": "M",
-    "notes": "Ten read-only tools, including has_visited, list_trips, travel_trackers, things_done and search_everything, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
+    "notes": "Twelve read-only tools, including has_visited, list_trips, travel_trackers, things_done, search_everything and ask_notes, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
+  },
+  {
+    "id": "ask-my-notes",
+    "title": "Ask My Notes",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "Search my Obsidian vault by meaning, not keywords, from any Claude chat. Ask a question and it finds the clippings that match, even ones that never use the same words.",
+    "builtWith": [
+      "Claude",
+      "MongoDB Atlas Vector Search",
+      "Voyage AI",
+      "GitHub Actions",
+      "FastMCP",
+      "Vercel"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-mcp#notes-search",
+    "color": "#00684A",
+    "glyph": "N",
+    "notes": "When I clip a page into Obsidian, the vault syncs to GitHub and a GitHub Action splits each note into chunks and upserts only the changed ones into MongoDB Atlas. Atlas Automated Embedding turns them into vectors with Voyage AI's voyage-4 model, so there's no embedding code or API key to manage. The ask_notes tool on my MCP server sends the question as plain text, Atlas returns the closest passages, and Claude answers from them with links to the notes. About 250 notes become 1,200 chunks, and it runs on a Flex cluster paid for with promo credits."
   },
   {
     "id": "ashistant",
