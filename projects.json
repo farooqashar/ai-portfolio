@@ -117,6 +117,21 @@
     "notes": "A small Vercel function fetches the MTA's TrainTime feed, trims it and caches it for 15 seconds, and a single mobile-first page shows countdowns, on-time or late status, stop lists and service alerts, refreshing every 30 seconds. Pick any two stations or tap a quick route, and the choice is saved in the link."
   },
   {
+    "id": "lirr-commute-tracker",
+    "title": "LIRR Commute Tracker",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A dashboard of my own LIRR commute: rides and spend by month, peak vs off-peak share, morning vs evening and day-of-week patterns, and where I could save.",
+    "builtWith": [
+      "AI-generated",
+      "HTML",
+      "JavaScript"
+    ],
+    "color": "#4D5357",
+    "glyph": "₵",
+    "notes": "Generated with AI as a single HTML page from my ride history for October 2025, March 2026 and August 2026. It charts rides and spending month by month, splits trips into peak and off-peak and morning and evening, lays each month out as a ride calendar, and adds tips on where I could save."
+  },
+  {
     "id": "reading-shelf",
     "title": "Reading Shelf",
     "kind": "Website",
@@ -515,6 +530,20 @@
     "notes": "It builds an inventory of companies with the evidence, the data each likely holds and a recommended action, and waits for my say before doing anything. Requests cite a privacy law only where one actually applies, go to the address or form in each company's privacy policy, and get tracked until the company confirms. It never sends anything on its own."
   },
   {
+    "id": "social-media-manager",
+    "title": "Social Media Manager",
+    "kind": "Agent",
+    "year": 2026,
+    "summary": "An agent that helps me post daily edits of what's happening in my life to TikTok and Instagram, and writes captions for the videos I drop into Notion.",
+    "builtWith": [
+      "AI agent",
+      "Notion"
+    ],
+    "color": "#D6336C",
+    "glyph": "♪",
+    "notes": "I upload a clip to Notion and the agent writes a caption for it, ready to go out on TikTok and Instagram."
+  },
+  {
     "id": "kb-islam",
     "title": "Islam knowledge base",
     "kind": "Knowledge base",
@@ -768,7 +797,6 @@
       "Workflow",
       "Gmail"
     ],
-    "url": "https://hub.sant.ai/base/165",
     "schedule": "Every day",
     "color": "#5C6B73",
     "glyph": "⛨",
