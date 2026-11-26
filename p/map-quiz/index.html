@@ -112,8 +112,8 @@
     .stat { flex: 1; min-width: 0; }
   }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.2/dist/d3.min.js" integrity="sha384-LxfWGZyh6PaLjBRPf7NWiEYs9Mn0UQ6ZmqbLLZhxlOBBNWF2a2K0Pfc5efkrNnhQ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrap">
@@ -256,8 +256,8 @@ const els = {
 // ---- Map data ---------------------------------------------------------
 // Natural Earth countries (world) and Census states (US), drawn from a CDN as TopoJSON.
 const GEO = {
-  world: { url: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json", object: "countries", w: 960, h: 480, projection: () => d3.geoNaturalEarth1() },
-  us:    { url: "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json", object: "states", w: 960, h: 600, projection: () => d3.geoAlbersUsa() }
+  world: { url: "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json", integrity: "sha384-Aw4s9pX1PTPntIYkZ/qV9IYiF5Gv8eTl6Dd/TT56zfO1Wwd+owFwYUuuXNUMrWkc", object: "countries", w: 960, h: 480, projection: () => d3.geoNaturalEarth1() },
+  us:    { url: "https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json", integrity: "sha384-s0hsN5kwP4LMWbFcTPSZT8Ev6nktHrbEYdPQngLCYA33Qhjk2wtqH5yIEu06AXMY", object: "states", w: 960, h: 600, projection: () => d3.geoAlbersUsa() }
 };
 // Map-file names that differ from our answer names.
 const GEO_NAME_FIX = {
@@ -270,7 +270,7 @@ const geoCache = {};
 
 function loadGeo(geo) {
   if (!geoCache[geo]) {
-    geoCache[geo] = fetch(GEO[geo].url)
+    geoCache[geo] = fetch(GEO[geo].url, { integrity: GEO[geo].integrity })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(topo => topojson.feature(topo, topo.objects[GEO[geo].object]).features
         .filter(f => f.properties.name !== "Antarctica"));

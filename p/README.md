@@ -8,6 +8,6 @@ A site in this folder must:
 - Use relative paths for its own files (`style.css`, `img/logo.png`). Paths starting with `/` point at the gallery's root instead.
 - Be plain HTML, CSS and JavaScript. Anything with a build step, an `npm install` or a server gets its own repo and is linked from the gallery.
 
-Libraries loaded from a CDN are fine.
+Libraries loaded from a CDN are fine. Each must use an exact version (`d3@7.9.2`, not `d3@7`) and an `integrity` attribute with `crossorigin="anonymous"`, hashed from the exact file referenced.
 
 Add a site with `node scripts/new-site.mjs`. See the [main README](../README.md).
