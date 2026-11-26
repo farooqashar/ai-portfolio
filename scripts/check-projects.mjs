@@ -30,6 +30,14 @@ const required = ["id", "title", "summary", "kind", "year", "builtWith", "notes"
 const seen = new Map();
 const hosted = new Set();
 const isEmpty = (v) => v === undefined || v === null || (typeof v === "string" && !v.trim());
+const isHttpsUrl = (v) => {
+  if (typeof v !== "string" || !v.startsWith("https://")) return false;
+  try {
+    return Boolean(new URL(v).hostname);
+  } catch {
+    return false;
+  }
+};
 
 projects.forEach((p, i) => {
   const where = `entry ${i + 1}${p && typeof p.id === "string" && p.id ? ` ("${p.id}")` : ""}`;
@@ -52,6 +60,10 @@ projects.forEach((p, i) => {
       problem(`"builtWith" must be a non-empty list of strings.`);
     }
   }
+  if (p.schedule !== undefined && (typeof p.schedule !== "string" || !p.schedule.trim())) {
+    problem(`"schedule" must be text like "Weekly", not ${JSON.stringify(p.schedule)}.`);
+  }
+  if (p.wide !== undefined && typeof p.wide !== "boolean") problem(`"wide" must be true or false, not ${JSON.stringify(p.wide)}.`);
   if (typeof p.color === "string" && p.color && !/^#[0-9A-Fa-f]{6}$/.test(p.color)) {
     problem(`"color" must be a hex color like #3A2FE0, not "${p.color}".`);
   }
@@ -65,13 +77,13 @@ projects.forEach((p, i) => {
         hosted.add(m[1]);
         if (!fs.existsSync(path.join(root, "p", m[1], "index.html"))) problem(`"url" is ${v} but p/${m[1]}/index.html doesn't exist.`);
       }
-    } else if (typeof v !== "string" || !v.startsWith("https://")) {
-      problem(`"${field}" must be /p/<slug>/ or start with https://, not ${JSON.stringify(v)}.`);
+    } else if (!isHttpsUrl(v)) {
+      problem(`"${field}" must be /p/<slug>/ or a full https:// link, not ${JSON.stringify(v)}.`);
     }
   }
 });
 
-const wide = projects.map((p, i) => (p && p.wide === true ? i : -1)).filter((i) => i >= 0);
+const wide = projects.map((p, i) => (p && p.wide ? i : -1)).filter((i) => i >= 0);
 if (wide.length > 1) problems.push(`projects.json: only one entry can have "wide": true, found ${wide.length} (entries ${wide.map((i) => i + 1).join(", ")}).`);
 else if (wide.length === 1 && wide[0] !== projects.length - 1) {
   problems.push(`projects.json entry ${wide[0] + 1}: the "wide" entry must be the last one, since it closes out the grid.`);
