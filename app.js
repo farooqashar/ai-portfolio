@@ -109,27 +109,27 @@
     const p = projects.find((x) => x.id === card.dataset.id);
     if (!p) return;
     openDetail(p);
-    if (location.hash !== "#" + p.id) {
-      history.pushState(null, "", "#" + p.id);
-      pushed = true;
-    }
+    if (location.hash !== "#" + p.id) history.pushState({ detail: p.id }, "", "#" + p.id);
   });
 
-  // Each detail has its own address, /#<id>, so it can be shared and Back closes it
-  let pushed = false;
+  // Each detail has its own address, /#<id>, so it can be shared and Back closes it.
+  // Entries this page pushed carry { detail } in history.state, which survives Back/Forward.
+  let syncing = false;
   const bareUrl = () => location.pathname + location.search;
   function syncHash() {
     let id = "";
     try { id = decodeURIComponent(location.hash.slice(1)); } catch {}
     const p = id && projects.find((x) => x.id === id);
     if (p) { if (!dialog.open || dialog.dataset.id !== p.id) openDetail(p); }
-    else if (!id && dialog.open) dialog.close();
+    else if (dialog.open) { syncing = true; dialog.close(); }
   }
   window.addEventListener("popstate", syncHash);
   window.addEventListener("hashchange", syncHash);
   dialog.addEventListener("close", () => {
-    if (!location.hash) { pushed = false; return; }
-    if (pushed) { pushed = false; history.back(); }
+    // A close caused by navigation already has the right URL
+    if (syncing) { syncing = false; return; }
+    if (!location.hash) return;
+    if (history.state && history.state.detail) history.back();
     else history.replaceState(null, "", bareUrl());
   });
 
