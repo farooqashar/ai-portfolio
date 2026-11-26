@@ -3,6 +3,7 @@
   const loading = document.getElementById("loading");
   const notice = document.getElementById("notice");
   const group = document.getElementById("filter-group");
+  const status = document.getElementById("results-status");
 
   const CACHE_KEY = "changelog:v1";
   const CACHE_MS = 10 * 60 * 1000;
@@ -119,6 +120,11 @@
     } else {
       loading.hidden = true;
     }
+
+    // One short count for screen readers, set only when it changes, so re-rendering once marked and DOMPurify load says nothing
+    let msg = shown.length ? `${shown.length} ${shown.length === 1 ? "release" : "releases"}` : "No releases";
+    if (active !== "All") msg += ` from ${labelOf(active)}`;
+    if (status.textContent !== msg) status.textContent = msg;
   }
 
   renderFilters();
