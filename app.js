@@ -107,7 +107,30 @@
     const card = e.target.closest(".card");
     if (!card) return;
     const p = projects.find((x) => x.id === card.dataset.id);
-    if (p) openDetail(p);
+    if (!p) return;
+    openDetail(p);
+    if (location.hash !== "#" + p.id) {
+      history.pushState(null, "", "#" + p.id);
+      pushed = true;
+    }
+  });
+
+  // Each detail has its own address, /#<id>, so it can be shared and Back closes it
+  let pushed = false;
+  const bareUrl = () => location.pathname + location.search;
+  function syncHash() {
+    let id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch {}
+    const p = id && projects.find((x) => x.id === id);
+    if (p) { if (!dialog.open || dialog.dataset.id !== p.id) openDetail(p); }
+    else if (!id && dialog.open) dialog.close();
+  }
+  window.addEventListener("popstate", syncHash);
+  window.addEventListener("hashchange", syncHash);
+  dialog.addEventListener("close", () => {
+    if (!location.hash) { pushed = false; return; }
+    if (pushed) { pushed = false; history.back(); }
+    else history.replaceState(null, "", bareUrl());
   });
 
   function openDetail(p) {
@@ -126,11 +149,13 @@
       : `<a class="btn primary" href="${esc(p.url)}" target="_blank" rel="noopener">${openLabel}</a>`);
     if (p.repo) actions.push(`<a class="btn" href="${esc(p.repo)}" target="_blank" rel="noopener">View code</a>`);
     document.getElementById("detail-actions").innerHTML = actions.join("");
-    dialog.showModal();
+    dialog.dataset.id = p.id;
+    if (!dialog.open) dialog.showModal();
   }
   document.getElementById("detail-close").addEventListener("click", () => dialog.close());
   dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
 
   renderFilters();
   renderGrid();
+  syncHash();
 })();

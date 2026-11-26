@@ -6,6 +6,8 @@ A gallery of the things I build with AI: websites, tools, agents, knowledge base
 
 The site is plain HTML, CSS and JavaScript with no build step. Every card on the page comes from one entry in `projects.json`, so adding a project means adding one entry.
 
+Each project's detail view can be linked directly as `https://ai.asharfarooq.xyz/#<id>`, using the entry's `id`.
+
 ## What's in the repo
 
 ```
