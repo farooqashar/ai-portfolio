@@ -122,7 +122,12 @@
     }
 
     // One short count for screen readers, set only when it changes, so re-rendering once marked and DOMPurify load says nothing
-    let msg = shown.length ? `${shown.length} ${shown.length === 1 ? "release" : "releases"}` : "No releases";
+    // A failed repo is unknown, not empty, so an empty result that includes one says the notes couldn't load
+    const lost = failed.filter((r) => active === "All" || r.repo === active);
+    let msg = shown.length ? `${shown.length} ${shown.length === 1 ? "release" : "releases"}`
+      : !lost.length ? "No releases"
+      : lost.length === (active === "All" ? repos.length : 1) ? "Release notes couldn't load"
+      : "No releases, and some release notes couldn't load";
     if (active !== "All") msg += ` from ${labelOf(active)}`;
     if (status.textContent !== msg) status.textContent = msg;
   }
