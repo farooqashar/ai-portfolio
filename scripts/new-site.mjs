@@ -60,7 +60,9 @@ if (src) {
         "More things I made with AI</a>\n"
     );
   }
-  if (!html.includes("feedback-relay.asharfarooq.workers.dev/widget.js")) {
+  // Only a <script> that loads the widget counts, not one inside an HTML comment
+  const hasWidget = /<script\b[^>]*\bsrc=["']?[^"'>\s]*feedback-relay\.asharfarooq\.workers\.dev\/widget\.js/i.test(html.replace(/<!--[\s\S]*?-->/g, ""));
+  if (!hasWidget) {
     html = insert(
       "<!-- Feedback widget (github.com/farooqashar/feedback-relay) -->\n" +
         `<script src="https://feedback-relay.asharfarooq.workers.dev/widget.js" data-project="AI Portfolio · ${esc(title)}" defer></script>\n`
