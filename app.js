@@ -67,14 +67,14 @@
       const where = p.url ? host(p.url) : p.schedule ? `Runs ${p.schedule.toLowerCase()}` : p.repo ? p.repo.replace(/^https?:\/\//, "") : "";
       const cls = !curated ? "" : p.wide ? "wide" : p.featured ? "featured" : "";
       return `<li class="${cls}">
-        <button class="card" type="button" data-id="${esc(p.id)}" style="--c:${esc(p.color)}">
+        <article class="card" data-id="${esc(p.id)}" style="--c:${esc(p.color)}">
           <div class="cover" aria-hidden="true"><span class="kind">${esc(p.kind)}</span><span class="glyph">${esc(p.glyph || p.title[0])}</span></div>
           <div class="card-body">
-            <h2>${esc(p.title)}</h2>
+            <h2><button class="card-open" type="button">${esc(p.title)}</button></h2>
             <p>${esc(p.summary)}</p>
             ${where ? `<span class="where">${esc(where)}</span>` : ""}
           </div>
-        </button>
+        </article>
       </li>`;
     }).join("");
     cols = 0;
