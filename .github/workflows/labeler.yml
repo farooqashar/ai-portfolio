@@ -1,15 +1,50 @@
 name: Pull Request Labeler
 
 # pull_request_target runs with the base branch's workflow and config, so the
-# token can label PRs from forks. This job never checks out or runs PR code.
+# token can label PRs from forks. This job never checks out or runs PR code,
+# and reads the PR body only through context.payload, never in a shell.
 on:
-  - pull_request_target
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
 
 jobs:
   labeler:
     permissions:
       contents: read
+      issues: read
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/labeler@v7
+      # Copy the type label (bug, enhancement, documentation) of each issue
+      # the PR closes, so fixes are listed under "Fixes" in the release notes.
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const typeLabels = ['bug', 'enhancement', 'documentation'];
+            const body = context.payload.pull_request.body || '';
+            const pattern = /\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s*:?\s+#(\d+)\b/gi;
+            const numbers = new Set([...body.matchAll(pattern)].map((m) => Number(m[1])));
+            const found = new Set();
+            for (const issue_number of numbers) {
+              try {
+                const { data: issue } = await github.rest.issues.get({ ...context.repo, issue_number });
+                if (issue.pull_request) continue;
+                for (const label of issue.labels) {
+                  const name = typeof label === 'string' ? label : label.name;
+                  if (typeLabels.includes(name)) found.add(name);
+                }
+              } catch (error) {
+                core.info(`Skipping #${issue_number}: ${error.message}`);
+              }
+            }
+            if (found.size === 0) {
+              core.info('No type labels to copy.');
+              return;
+            }
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: [...found],
+            });
+            core.info(`Added: ${[...found].join(', ')}`);

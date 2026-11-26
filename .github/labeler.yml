@@ -1,9 +1,10 @@
+# scripts/**, templates/**, .github/**, vercel.json and .vercelignore are maintenance: they get no path label and land in "Other changes" unless the PR fixes a bug.
 gallery:
   - changed-files:
       - any-glob-to-any-file: ["projects.json", "p/**"]
 site:
   - changed-files:
-      - any-glob-to-any-file: ["index.html", "styles.css", "app.js"]
+      - any-glob-to-any-file: ["index.html", "styles.css", "app.js", "changelog/**", "changelog.json"]
 documentation:
   - changed-files:
       - any-glob-to-any-file: ["**/*.md"]
