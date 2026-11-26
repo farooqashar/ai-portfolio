@@ -35,7 +35,7 @@ node scripts/new-site.mjs trip-recap "Trip recap" "One-line summary"
 node scripts/new-site.mjs trip-recap "Trip recap" "One-line summary" --from ~/Downloads/recap.html
 ```
 
-The script also adds a "More things I made with AI" link back to the gallery. Afterwards, fill in `notes` and `builtWith` for the new entry in `projects.json`, then commit and push.
+The script also adds a "More things I made with AI" link back to the gallery and the feedback widget. Afterwards, fill in `notes` and `builtWith` for the new entry in `projects.json`, then commit and push.
 
 A hosted site must have an `index.html` at the top of its folder and use relative paths for its own files. See [`p/README.md`](p/README.md).
 
