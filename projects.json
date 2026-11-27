@@ -17,11 +17,186 @@
     "notes": "After a trip I tell AI which countries to add, and it updates the data and redeploys. The October 2026 Eastern Europe trip added five countries in one pass."
   },
   {
+    "id": "reading-shelf",
+    "title": "Reading Shelf",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "Everything I've been reading, as a bookshelf with one spine per article, plus a searchable reading log and an RSS feed. It updates itself whenever I clip something new.",
+    "builtWith": [
+      "Claude",
+      "Netlify",
+      "Obsidian",
+      "GitHub Actions"
+    ],
+    "url": "https://reading.asharfarooq.xyz",
+    "repo": "https://github.com/farooqashar/Reading-Shelf",
+    "color": "#8C5E3C",
+    "glyph": "R",
+    "featured": true,
+    "notes": "I clip pages into my Obsidian vault, which syncs to GitHub. A GitHub Action in the vault pings a Netlify build hook, and the build reads every clipping's metadata and writes the shelf, a JSON file and the feed. Only titles, links, tags and dates are published; the article text stays in the vault."
+  },
+  {
+    "id": "tried-stack-tools",
+    "title": "What's on my radar",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "Every AI tool, model and platform I've tried, plus the ones on my list to try, drawn as a radar: tried tools on the inner ring, the rest on the outer ring. Below it is a searchable list with my notes.",
+    "builtWith": [
+      "Claude",
+      "Astro",
+      "Render",
+      "Google Docs"
+    ],
+    "url": "https://tools.asharfarooq.xyz",
+    "repo": "https://github.com/farooqashar/tried-stack-tools",
+    "color": "#2A52D6",
+    "glyph": "◎",
+    "featured": true,
+    "notes": "I keep the list in a public Google Doc. Each Render build downloads the Doc as Markdown, reads the table, sorts every tool into a category and builds a static Astro site, so after editing the Doc I just click Deploy. The cleaned list is also published as JSON for other sites to reuse."
+  },
+  {
+    "id": "ashar-mcp",
+    "title": "My personal MCP server",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "An MCP server that lets Claude, or any AI assistant, answer questions about my trips, travel trackers and Things Done timeline.",
+    "builtWith": [
+      "Python",
+      "FastMCP",
+      "Vercel"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-mcp",
+    "color": "#1D3557",
+    "glyph": "M",
+    "featured": true,
+    "notes": "Twelve read-only tools, including has_visited, list_trips, travel_trackers, things_done, search_everything and ask_notes, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
+  },
+  {
+    "id": "ask-my-notes",
+    "title": "Ask My Notes",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "Search my Obsidian vault by meaning, not keywords, from any Claude chat. Ask a question and it finds the clippings that match, even ones that never use the same words.",
+    "builtWith": [
+      "Claude",
+      "MongoDB Atlas Vector Search",
+      "Voyage AI",
+      "GitHub Actions",
+      "FastMCP",
+      "Vercel"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-mcp#notes-search",
+    "color": "#00684A",
+    "glyph": "N",
+    "featured": true,
+    "notes": "When I clip a page into Obsidian, the vault syncs to GitHub and a GitHub Action splits each note into chunks and upserts only the changed ones into MongoDB Atlas. Atlas Automated Embedding turns them into vectors with Voyage AI's voyage-4 model, so there's no embedding code or API key to manage. The ask_notes tool on my MCP server sends the question as plain text, Atlas returns the closest passages, and Claude answers from them with links to the notes. About 250 notes become 1,200 chunks, and it runs on a Flex cluster paid for with promo credits."
+  },
+  {
+    "id": "ashistant",
+    "title": "Ashistant Discord bot",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "An AI bot for my Discord server with a dozen slash commands: /ask, /tldr, /research, /event, /remind, /food, /summarize, /vibe-check, /trivia and more.",
+    "builtWith": [
+      "Claude",
+      "Cloudflare Workers",
+      "Cloudflare D1",
+      "Discord"
+    ],
+    "repo": "https://github.com/farooqashar/Discord-AI-General-Bot",
+    "color": "#5865F2",
+    "glyph": "/",
+    "featured": true,
+    "notes": "Runs free on Cloudflare Workers with no server to keep up. Each command is an HTTP request: the Worker checks Discord's signature, replies \"thinking…\" right away, then edits in the answer. /event creates a real Discord event with an Add to Google Calendar button, /research posts a sourced report in a thread, and reminders live in a D1 database checked every minute."
+  },
+  {
+    "id": "ashar-cli",
+    "title": "ashar CLI",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "My personal command-line tool: ashar commute for transit directions on my saved route, and ashar trip for instant trip-planning links.",
+    "builtWith": [
+      "Python",
+      "uv",
+      "GitHub Actions"
+    ],
+    "repo": "https://github.com/farooqashar/ashar-cli",
+    "color": "#2B2D42",
+    "glyph": ">",
+    "featured": true,
+    "notes": "Packaged as ashar-cli with the command ashar. Your stations are saved privately in your own config file, never in the package. Tests run in CI, and tagging a release publishes to PyPI through GitHub Actions."
+  },
+  {
+    "id": "goto-links",
+    "title": "goto links",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "Short, memorable links to my profiles: goto.asharfarooq.xyz/linkedin, /gh, /ig, /resume and more.",
+    "builtWith": [
+      "Claude",
+      "Vercel",
+      "Gen.xyz DNS"
+    ],
+    "url": "https://goto.asharfarooq.xyz",
+    "repo": "https://github.com/farooqashar/goto-links",
+    "color": "#0A9396",
+    "glyph": "↗",
+    "featured": true,
+    "notes": "The whole thing is one vercel.json file of redirects, with no app and no build step. Claude pulled my profile links from my personal site, wrote the redirects and pushed the repo; I imported it into Vercel and pointed a goto CNAME at it from Gen.xyz. The redirects are temporary (307) so I can change where a link points without browsers caching the old one, and any unknown path falls through to my main site. Adding a link is one line and a push."
+  },
+  {
+    "id": "kb-ai-agents",
+    "title": "Agent registry",
+    "kind": "Agent",
+    "year": 2026,
+    "summary": "Twenty-three ready-made agent definitions, from code review and debugging to research, writing and travel planning, for use as subagents.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "repo": "https://github.com/farooqashar/AI-agents",
+    "color": "#5F0F40",
+    "glyph": "A",
+    "featured": true,
+    "notes": "Each agent is one Markdown file describing its role, scope and approach, with a guide on how to plug them into an AI coding tool as focused subagents."
+  },
+  {
+    "id": "kb-mit-intro-cs",
+    "title": "MIT Intro to CS notes",
+    "kind": "Knowledge base",
+    "year": 2026,
+    "summary": "Study notes for MIT 6.0001/6.0002, Intro to CS in Python: every session summarized, with deep dives on object-oriented programming and an OOP study guide.",
+    "builtWith": [
+      "AI-generated",
+      "Markdown"
+    ],
+    "color": "#A31F34",
+    "glyph": "6",
+    "featured": true,
+    "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials: a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
+  },
+  {
+    "id": "obsidian-cleanup",
+    "title": "Obsidian vault cleanup",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every week, new web clippings in my Obsidian vault get filed into topic folders, renamed, titled and tagged.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Obsidian",
+      "Bash"
+    ],
+    "schedule": "Weekly",
+    "color": "#7B5EA7",
+    "glyph": "O",
+    "featured": true,
+    "notes": "Claude works on the vault on my Mac using a fixed set of topic folders and a shared tag vocabulary. Moves never overwrite anything, duplicates are only flagged, and every run leaves a dated log in the vault."
+  },
+  {
     "id": "slack-backup",
     "title": "Slack backup to Drive",
     "kind": "Automation",
     "year": 2026,
-    "featured": true,
     "summary": "Every week, new messages from my Slack workspace, threads included, are saved to a fresh Google Doc. API keys get redacted along the way.",
     "builtWith": [
       "Claude scheduled tasks",
@@ -38,7 +213,6 @@
     "title": "The Birthday Haul",
     "kind": "Website",
     "year": 2026,
-    "featured": true,
     "summary": "Sixty birthday freebies and discounts from restaurants, coffee shops and stores, searchable and sortable by how long each reward lasts.",
     "builtWith": [
       "Claude",
@@ -63,8 +237,7 @@
     "repo": "https://github.com/farooqashar/startups",
     "color": "#264653",
     "glyph": "S",
-    "notes": "Generated with AI as a structured reference I can come back to: 12 guides, 6 case studies, 10 frameworks and 20+ checklists, organized by topic.",
-    "featured": true
+    "notes": "Generated with AI as a structured reference I can come back to: 12 guides, 6 case studies, 10 frameworks and 20+ checklists, organized by topic."
   },
   {
     "id": "halal-map",
@@ -80,8 +253,7 @@
     "url": "/p/halal-map/",
     "color": "#0E5C46",
     "glyph": "☾",
-    "notes": "Generated with AI as a static site on Leaflet and OpenStreetMap. Each spot was researched and pinned by address, with what to order, a price level and tags like late night or group-friendly. Filter by area, price and cuisine, sort by distance with Near me, and get directions from any pin. On a phone it switches between list and map.",
-    "featured": true
+    "notes": "Generated with AI as a static site on Leaflet and OpenStreetMap. Each spot was researched and pinned by address, with what to order, a price level and tags like late night or group-friendly. Filter by area, price and cuisine, sort by distance with Near me, and get directions from any pin. On a phone it switches between list and map."
   },
   {
     "id": "ai-startup-atlas",
@@ -132,24 +304,6 @@
     "notes": "Generated with AI as a single HTML page from my ride history for October 2025, March 2026 and August 2026. It charts rides and spending month by month, splits trips into peak and off-peak and morning and evening, lays each month out as a ride calendar, and adds tips on where I could save."
   },
   {
-    "id": "reading-shelf",
-    "title": "Reading Shelf",
-    "kind": "Website",
-    "year": 2026,
-    "summary": "Everything I've been reading, as a bookshelf with one spine per article, plus a searchable reading log and an RSS feed. It updates itself whenever I clip something new.",
-    "builtWith": [
-      "Claude",
-      "Netlify",
-      "Obsidian",
-      "GitHub Actions"
-    ],
-    "url": "https://reading.asharfarooq.xyz",
-    "repo": "https://github.com/farooqashar/Reading-Shelf",
-    "color": "#8C5E3C",
-    "glyph": "R",
-    "notes": "I clip pages into my Obsidian vault, which syncs to GitHub. A GitHub Action in the vault pings a Netlify build hook, and the build reads every clipping's metadata and writes the shelf, a JSON file and the feed. Only titles, links, tags and dates are published; the article text stays in the vault."
-  },
-  {
     "id": "image-chat",
     "title": "Image Chat",
     "kind": "Website",
@@ -166,24 +320,6 @@
     "color": "#0F7B6C",
     "glyph": "I",
     "notes": "I wanted a free way to play with open image models. Claude built it as a single HTML file on a free Static Space: the page calls Hugging Face's model Spaces (FLUX.1 Krea, Qwen-Image, FLUX.1 schnell, and FLUX.1 Kontext for photo edits) straight from the browser with Gradio's JavaScript client. Each visitor pastes their own Hugging Face token, kept only in their browser, so images come out of their own free GPU allowance (about 3 a day), not mine."
-  },
-  {
-    "id": "tried-stack-tools",
-    "title": "What's on my radar",
-    "kind": "Website",
-    "year": 2026,
-    "summary": "Every AI tool, model and platform I've tried, plus the ones on my list to try, drawn as a radar: tried tools on the inner ring, the rest on the outer ring. Below it is a searchable list with my notes.",
-    "builtWith": [
-      "Claude",
-      "Astro",
-      "Render",
-      "Google Docs"
-    ],
-    "url": "https://tools.asharfarooq.xyz",
-    "repo": "https://github.com/farooqashar/tried-stack-tools",
-    "color": "#2A52D6",
-    "glyph": "◎",
-    "notes": "I keep the list in a public Google Doc. Each Render build downloads the Doc as Markdown, reads the table, sorts every tool into a category and builds a static Astro site, so after editing the Doc I just click Deploy. The cleaned list is also published as JSON for other sites to reuse."
   },
   {
     "id": "mini-football",
@@ -400,91 +536,6 @@
     "notes": "Generated with AI as a Bun app with a SQLite database. Passengers draw their signature on a canvas pad, which is cropped to the ink before saving, and every entry becomes a numbered card in a searchable log with running counts of passengers and shotgun calls. A simple throttle stops anyone signing more than once every few seconds."
   },
   {
-    "id": "ashar-mcp",
-    "title": "My personal MCP server",
-    "kind": "Tool",
-    "year": 2026,
-    "summary": "An MCP server that lets Claude, or any AI assistant, answer questions about my trips, travel trackers and Things Done timeline.",
-    "builtWith": [
-      "Python",
-      "FastMCP",
-      "Vercel"
-    ],
-    "repo": "https://github.com/farooqashar/ashar-mcp",
-    "color": "#1D3557",
-    "glyph": "M",
-    "notes": "Twelve read-only tools, including has_visited, list_trips, travel_trackers, things_done, search_everything and ask_notes, over 60 countries, 19 trips and nine years of Things Done entries. The data comes from my travel and Things Done sites, so nothing private is exposed. It's deployed free as a remote server on Vercel."
-  },
-  {
-    "id": "ask-my-notes",
-    "title": "Ask My Notes",
-    "kind": "Tool",
-    "year": 2026,
-    "summary": "Search my Obsidian vault by meaning, not keywords, from any Claude chat. Ask a question and it finds the clippings that match, even ones that never use the same words.",
-    "builtWith": [
-      "Claude",
-      "MongoDB Atlas Vector Search",
-      "Voyage AI",
-      "GitHub Actions",
-      "FastMCP",
-      "Vercel"
-    ],
-    "repo": "https://github.com/farooqashar/ashar-mcp#notes-search",
-    "color": "#00684A",
-    "glyph": "N",
-    "notes": "When I clip a page into Obsidian, the vault syncs to GitHub and a GitHub Action splits each note into chunks and upserts only the changed ones into MongoDB Atlas. Atlas Automated Embedding turns them into vectors with Voyage AI's voyage-4 model, so there's no embedding code or API key to manage. The ask_notes tool on my MCP server sends the question as plain text, Atlas returns the closest passages, and Claude answers from them with links to the notes. About 250 notes become 1,200 chunks, and it runs on a Flex cluster paid for with promo credits."
-  },
-  {
-    "id": "ashistant",
-    "title": "Ashistant Discord bot",
-    "kind": "Tool",
-    "year": 2026,
-    "summary": "An AI bot for my Discord server with a dozen slash commands: /ask, /tldr, /research, /event, /remind, /food, /summarize, /vibe-check, /trivia and more.",
-    "builtWith": [
-      "Claude",
-      "Cloudflare Workers",
-      "Cloudflare D1",
-      "Discord"
-    ],
-    "repo": "https://github.com/farooqashar/Discord-AI-General-Bot",
-    "color": "#5865F2",
-    "glyph": "/",
-    "notes": "Runs free on Cloudflare Workers with no server to keep up. Each command is an HTTP request: the Worker checks Discord's signature, replies \"thinking…\" right away, then edits in the answer. /event creates a real Discord event with an Add to Google Calendar button, /research posts a sourced report in a thread, and reminders live in a D1 database checked every minute."
-  },
-  {
-    "id": "ashar-cli",
-    "title": "ashar CLI",
-    "kind": "Tool",
-    "year": 2026,
-    "summary": "My personal command-line tool: ashar commute for transit directions on my saved route, and ashar trip for instant trip-planning links.",
-    "builtWith": [
-      "Python",
-      "uv",
-      "GitHub Actions"
-    ],
-    "repo": "https://github.com/farooqashar/ashar-cli",
-    "color": "#2B2D42",
-    "glyph": ">",
-    "notes": "Packaged as ashar-cli with the command ashar. Your stations are saved privately in your own config file, never in the package. Tests run in CI, and tagging a release publishes to PyPI through GitHub Actions."
-  },
-  {
-    "id": "goto-links",
-    "title": "goto links",
-    "kind": "Tool",
-    "year": 2026,
-    "summary": "Short, memorable links to my profiles: goto.asharfarooq.xyz/linkedin, /gh, /ig, /resume and more.",
-    "builtWith": [
-      "Claude",
-      "Vercel",
-      "Gen.xyz DNS"
-    ],
-    "url": "https://goto.asharfarooq.xyz",
-    "repo": "https://github.com/farooqashar/goto-links",
-    "color": "#0A9396",
-    "glyph": "↗",
-    "notes": "The whole thing is one vercel.json file of redirects, with no app and no build step. Claude pulled my profile links from my personal site, wrote the redirects and pushed the repo; I imported it into Vercel and pointed a goto CNAME at it from Gen.xyz. The redirects are temporary (307) so I can change where a link points without browsers caching the old one, and any unknown path falls through to my main site. Adding a link is one line and a push."
-  },
-  {
     "id": "agent-travel",
     "title": "Travel Agent",
     "kind": "Agent",
@@ -499,21 +550,6 @@
     "color": "#0081A7",
     "glyph": "T",
     "notes": "Defined as a subagent with web access but no permission to edit files or run commands, so it can research but not act. It works in six steps: understand preferences, research, plan logistics, optimize the route, break down the budget, and assess risks. It adapts to business, family, solo, adventure and budget trips, and always reminds you to check current entry rules before booking."
-  },
-  {
-    "id": "kb-ai-agents",
-    "title": "Agent registry",
-    "kind": "Agent",
-    "year": 2026,
-    "summary": "Twenty-three ready-made agent definitions, from code review and debugging to research, writing and travel planning, for use as subagents.",
-    "builtWith": [
-      "AI-generated",
-      "Markdown"
-    ],
-    "repo": "https://github.com/farooqashar/AI-agents",
-    "color": "#5F0F40",
-    "glyph": "A",
-    "notes": "Each agent is one Markdown file describing its role, scope and approach, with a guide on how to plug them into an AI coding tool as focused subagents."
   },
   {
     "id": "delete-me",
@@ -587,20 +623,6 @@
     "color": "#A4161A",
     "glyph": "M",
     "notes": "The 2019 and 2020 course materials gathered into one indexed repo, so an AI assistant can draw on them when I'm learning or working at the command line."
-  },
-  {
-    "id": "kb-mit-intro-cs",
-    "title": "MIT Intro to CS notes",
-    "kind": "Knowledge base",
-    "year": 2026,
-    "summary": "Study notes for MIT 6.0001/6.0002, Intro to CS in Python: every session summarized, with deep dives on object-oriented programming and an OOP study guide.",
-    "builtWith": [
-      "AI-generated",
-      "Markdown"
-    ],
-    "color": "#A31F34",
-    "glyph": "6",
-    "notes": "Built from MIT OpenCourseWare's Fall 2016 lecture materials: a course index, detailed notes on classes and inheritance, a summary of the other sessions from recursion to Big O and sorting, and learning paths for starting from scratch or brushing up on OOP."
   },
   {
     "id": "kb-nfl",
@@ -831,22 +853,6 @@
     "color": "#00798C",
     "glyph": "D",
     "notes": "It works through the catch-all folders first and proposes moves and renames as a numbered list. Nothing moves until I reply with which items to approve, then Claude carries them out in the same session."
-  },
-  {
-    "id": "obsidian-cleanup",
-    "title": "Obsidian vault cleanup",
-    "kind": "Automation",
-    "year": 2026,
-    "summary": "Every week, new web clippings in my Obsidian vault get filed into topic folders, renamed, titled and tagged.",
-    "builtWith": [
-      "Claude scheduled tasks",
-      "Obsidian",
-      "Bash"
-    ],
-    "schedule": "Weekly",
-    "color": "#7B5EA7",
-    "glyph": "O",
-    "notes": "Claude works on the vault on my Mac using a fixed set of topic folders and a shared tag vocabulary. Moves never overwrite anything, duplicates are only flagged, and every run leaves a dated log in the vault."
   },
   {
     "id": "screenshot-renamer",
