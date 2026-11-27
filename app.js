@@ -5,6 +5,7 @@
   const dialog = document.getElementById("detail");
   const search = document.getElementById("search");
   const sort = document.getElementById("sort");
+  const status = document.getElementById("results-status");
 
   let projects = [];
   try {
@@ -79,6 +80,16 @@
     }).join("");
     cols = 0;
     if (curated) fillLastRow();
+    announce(list.length, terms.join(" "));
+  }
+
+  // One short count for screen readers, set only when it changes so the cards themselves are never read out
+  function announce(n, query) {
+    let msg = n ? `${n} ${n === 1 ? "project" : "projects"}` : "No projects";
+    if (active !== "All") msg += ` in ${active}s`;
+    if (query) msg += ` ${n === 1 ? "matches" : "match"} "${query}"`;
+    if (n && sort.value !== "picked") msg += `, sorted ${sort.selectedOptions[0].text}`;
+    if (status.textContent !== msg) status.textContent = msg;
   }
 
   // Stretch the last card of the curated grid so the row before the wide card ends flush
