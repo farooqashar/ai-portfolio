@@ -15,6 +15,7 @@ index.html, styles.css, app.js   the gallery page
 projects.json                    every project shown on the page
 p/<slug>/                        small sites hosted here, served at /p/<slug>/
 scripts/new-site.mjs             adds a hosted site and its gallery entry
+scripts/check-projects.mjs       checks projects.json before it ships
 templates/site/                  starter page for a new hosted site
 vercel.json, .vercelignore       deploy settings
 ```
@@ -62,6 +63,14 @@ Sites with a build step, apps with a server, repos and automations stay where th
 ```
 
 Then commit and push. Vercel redeploys on every push to `main`.
+
+### Check before you push
+
+```sh
+node scripts/check-projects.mjs
+```
+
+It checks `projects.json` against the fields below and the folders in `p/`, and prints one line per problem. A pull request runs the same check, because a single typo in `projects.json` blanks the whole gallery.
 
 ## Entry fields
 
