@@ -4,6 +4,7 @@
   --ink: #15192B;
   --muted: #565D72;
   --ultra: #3A2FE0;
+  --focus: var(--ultra);
   --sun: #FFD23F;
   --line: #CDD2DB;
   --radius-lg: 22px;
@@ -17,10 +18,11 @@
     --ink: #EDEFF5;
     --muted: #A3A9BD;
     --line: #333954;
+    --focus: #9D96FF;
   }
 }
 :root[data-theme="dark"] {
-  --fog: #14172A; --paper: #1E2238; --ink: #EDEFF5; --muted: #A3A9BD; --line: #333954;
+  --fog: #14172A; --paper: #1E2238; --ink: #EDEFF5; --muted: #A3A9BD; --line: #333954; --focus: #9D96FF;
 }
 
 * { box-sizing: border-box; }
@@ -35,7 +37,7 @@ body {
   font-variation-settings: "opsz" 14;
 }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--ultra); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
 
 .intro, main, .foot {
   width: min(1180px, 100% - 32px);
@@ -130,8 +132,7 @@ a { color: inherit; }
 .grid > li.fill { grid-column: span var(--span); }
 
 .card {
-  all: unset;
-  box-sizing: border-box;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -141,7 +142,11 @@ a { color: inherit; }
   overflow: hidden;
   cursor: pointer;
 }
-.card:focus-visible { outline: 3px solid var(--ultra); outline-offset: 3px; }
+.card:has(.card-open:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
+/* The title's button covers the whole card, so the card shows the focus ring instead */
+.card-open { all: unset; cursor: pointer; }
+.card-open:focus-visible { outline: none; }
+.card-open::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
 
 /* Cover: each project's own color and letter */
 .cover {
