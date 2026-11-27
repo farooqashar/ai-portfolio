@@ -21,7 +21,9 @@ function fail(msg) {
   process.exit(1);
 }
 
-if (!slug || !title) fail('Usage: node scripts/new-site.mjs <slug> "Title" "Summary" [--from <file-or-folder>]');
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+if (!slug || !title || (fromIdx >= 0 && (!from || from.startsWith("--")))) fail('Usage: node scripts/new-site.mjs <slug> "Title" "Summary" [--from <file-or-folder>]');
 if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) fail("Slug must be lowercase letters, numbers and hyphens, like trip-recap-2026.");
 
 const dest = path.join(root, "p", slug);
@@ -46,22 +48,31 @@ if (src) {
   } else {
     fs.copyFileSync(src, path.join(dest, "index.html"));
   }
-  // Add the link back to the gallery, unless the page already has one
+  // Add the link back to the gallery and the feedback widget, unless the page already has them
   const indexPath = path.join(dest, "index.html");
-  const html = fs.readFileSync(indexPath, "utf8");
+  let html = fs.readFileSync(indexPath, "utf8");
+  const insert = (tag) => (/<\/body>/i.test(html) ? html.replace(/<\/body>/i, () => tag + "</body>") : html + tag);
   if (!html.includes('class="home-link"')) {
-    const link =
+    html = insert(
       '\n<a class="home-link" href="/" style="position:fixed;right:16px;bottom:16px;z-index:9999;' +
-      "padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;" +
-      'font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">' +
-      "More things I made with AI</a>\n";
-    const out = /<\/body>/i.test(html) ? html.replace(/<\/body>/i, link + "</body>") : html + link;
-    fs.writeFileSync(indexPath, out);
+        "padding:8px 14px;border-radius:999px;background:#15192B;color:#fff;" +
+        'font:600 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.2)">' +
+        "More things I made with AI</a>\n"
+    );
   }
+  // Only a <script> that loads the widget counts, not one inside an HTML comment
+  const hasWidget = /<script\b[^>]*\bsrc=["']?[^"'>\s]*feedback-relay\.asharfarooq\.workers\.dev\/widget\.js/i.test(html.replace(/<!--[\s\S]*?-->/g, ""));
+  if (!hasWidget) {
+    html = insert(
+      "<!-- Feedback widget (github.com/farooqashar/feedback-relay) -->\n" +
+        `<script src="https://feedback-relay.asharfarooq.workers.dev/widget.js" data-project="AI Portfolio · ${esc(title)}" defer></script>\n`
+    );
+  }
+  fs.writeFileSync(indexPath, html);
 } else {
-  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const tpl = fs.readFileSync(path.join(root, "templates", "site", "index.html"), "utf8");
-  fs.writeFileSync(path.join(dest, "index.html"), tpl.replaceAll("{{TITLE}}", esc(title)).replaceAll("{{SUMMARY}}", esc(summary)));
+  // Function replacements, so a "$" in the title or summary stays literal
+  fs.writeFileSync(path.join(dest, "index.html"), tpl.replaceAll("{{TITLE}}", () => esc(title)).replaceAll("{{SUMMARY}}", () => esc(summary)));
 }
 
 // Pick a cover color not already used in the gallery
