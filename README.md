@@ -21,7 +21,7 @@ vercel.json, .vercelignore       deploy settings
 
 ## Add a project
 
-Make changes through a pull request: each one is labelled automatically by the files it touches, and GitHub builds its generated release notes from merged pull requests and their labels.
+Make changes through a pull request: each one is labelled automatically by the files it touches, and GitHub builds its generated release notes from merged pull requests and their labels. A pull request also gets the `bug`, `enhancement` or `documentation` label of the issue it closes.
 
 There are two ways, depending on where the project lives.
 
@@ -96,6 +96,6 @@ The repo is a Vercel project with no framework and no build command, deploying f
 
 ## Changelog
 
-Releases are cut monthly and listed on the repo's [Releases](https://github.com/farooqashar/ai-portfolio/releases) page. The site has no version number, so tags use the year and month: `v2026.11` is the release for November 2026. On the 1st of each month, `.github/workflows/monthly-release.yml` releases the previous month with notes generated from the PRs merged since the last release. It does nothing if no PRs were merged since the last release.
+Releases are cut monthly and listed on the repo's [Releases](https://github.com/farooqashar/ai-portfolio/releases) page. The site has no version number, so tags use the year and month: `v2026.11` is the release for November 2026. On the 1st of each month, `.github/workflows/monthly-release.yml` releases the previous month with notes generated from the PRs merged since the last release. Fixes are listed first, so a PR labelled `bug` appears under "Fixes" even when it also touches the site or gallery. It does nothing if no PRs were merged since the last release.
 
 For an off-cycle release, run the **Monthly release** workflow manually from the Actions tab. A manual run releases the current month, so a run on November 20 tags `v2026.11`. If the month already has a release, the tag gets a suffix and the title says which update it is: `v2026.11.1` is "November 2026 (update 1)", then `v2026.11.2`, and so on.

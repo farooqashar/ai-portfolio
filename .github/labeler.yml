@@ -1,9 +1,10 @@
+# scripts/**, templates/**, .github/**, vercel.json and .vercelignore are maintenance and have no rule here. A PR touching only them lands in "Other changes", unless another rule matches (such as **/*.md) or it gets a type label from the issue it closes (see workflows/labeler.yml).
 gallery:
   - changed-files:
       - any-glob-to-any-file: ["projects.json", "p/**"]
 site:
   - changed-files:
-      - any-glob-to-any-file: ["index.html", "styles.css", "app.js"]
+      - any-glob-to-any-file: ["index.html", "styles.css", "app.js", "changelog/**", "changelog.json"]
 documentation:
   - changed-files:
       - any-glob-to-any-file: ["**/*.md"]
