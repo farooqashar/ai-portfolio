@@ -536,6 +536,41 @@
     "notes": "Generated with AI as a Bun app with a SQLite database. Passengers draw their signature on a canvas pad, which is cropped to the ink before saving, and every entry becomes a numbered card in a searchable log with running counts of passengers and shotgun calls. A simple throttle stops anyone signing more than once every few seconds."
   },
   {
+    "id": "decision-whiteboard",
+    "title": "Decision Whiteboard",
+    "kind": "Website",
+    "year": 2026,
+    "summary": "A shared board where a group drops their thoughts. One click on Summarize and AI turns them into the group's consensus, where people agree and disagree, open questions and a suggested decision.",
+    "builtWith": [
+      "Claude",
+      "React",
+      "Supabase",
+      "DigitalOcean App Platform",
+      "Claude API"
+    ],
+    "url": "https://thoughts-to-actions.asharfarooq.xyz",
+    "repo": "https://github.com/farooqashar/decision-whiteboard",
+    "color": "#3ECF8E",
+    "glyph": "⊞",
+    "notes": "Built with Claude as a way to learn Supabase. Notes are saved in Supabase Postgres with row-level security and show up live for everyone on the board through Supabase Realtime. Summarize calls a Supabase Edge Function, which sends the board to Claude and saves the result, so the API key never reaches the browser. The site is a free static Vite + React build on DigitalOcean App Platform, and I set up both services through their dashboards instead of a CLI."
+  },
+  {
+    "id": "feedback-relay",
+    "title": "Feedback relay",
+    "kind": "Tool",
+    "year": 2026,
+    "summary": "One feedback button for all my sites. Visitors type a message, with an optional thumbs up or down, and it lands as a card in my Discord.",
+    "builtWith": [
+      "Claude",
+      "Cloudflare Workers",
+      "Discord webhooks"
+    ],
+    "repo": "https://github.com/farooqashar/feedback-relay",
+    "color": "#F38020",
+    "glyph": "💬",
+    "notes": "A free Cloudflare Worker serves the widget and forwards each message to a Discord webhook, so the webhook URL never reaches the browser. Adding it to a site takes one script tag, with optional attributes for the project name, color and position. Spam is filtered with a hidden honeypot field, a minimum time to submit, a per-IP rate limit and an origin allowlist. It runs on this gallery, my portfolio, LIRR Live, my tools site, Reading Shelf, my chatbot and the Decision Whiteboard."
+  },
+  {
     "id": "agent-travel",
     "title": "Travel Agent",
     "kind": "Agent",
@@ -858,6 +893,38 @@
     "color": "#2E86AB",
     "glyph": "◷",
     "notes": "A Google Apps Script I wrote with Claude. It runs free on Google's servers on a Friday trigger. It merges overlapping events so busy time isn't double-counted, skips declined invites, counts an event shared across calendars once, and compares each number with the previous week. It's read-only on the calendar; the only things it writes are the email and one Sheet row."
+  },
+  {
+    "id": "ai-memory-sync",
+    "title": "AI memory sync",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every week, a snapshot of what Claude, ChatGPT and Gemini each remember about me, saved to my context repo so I can see how each AI's picture of me changes over time.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "Claude memory",
+      "GitHub"
+    ],
+    "schedule": "Weekly",
+    "color": "#9B5DE5",
+    "glyph": "⟲",
+    "notes": "A Claude scheduled task runs every Saturday. It reads Claude's own memory directly and sends me a prompt to paste into ChatGPT and Gemini. It rewrites one snapshot file per tool in a private GitHub repo, writes a plain-English changelog of what each tool added or dropped, and opens a pull request for me to review. Git history is the timeline. Addresses, phone numbers and account numbers are redacted, it only touches its own folder, and it never merges anything itself."
+  },
+  {
+    "id": "github-cleanup",
+    "title": "GitHub cleaning agent",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every Sunday, an agent reviews my active repos and live sites for bugs, broken layouts and security slips, then files issues written so other AI coding agents can fix them.",
+    "builtWith": [
+      "Claude scheduled tasks",
+      "GitHub",
+      "Playwright"
+    ],
+    "schedule": "Weekly",
+    "color": "#24292F",
+    "glyph": "⌕",
+    "notes": "A Claude scheduled task that reads each repo's code and config and runs quick lint and type checks. For sites, it opens the live page in a headless browser at desktop and phone sizes, in light and dark mode, and checks the screenshots for overflow, clipped text and accessibility problems. Each issue includes the file and line, evidence, a suggested fix and acceptance criteria. It checks existing issues so it never files duplicates, caps itself at five issues per repo, and never pushes code or edits a repo. That's left to the coding agents that pick the issues up."
   },
   {
     "id": "gmail-labels",
