@@ -825,6 +825,41 @@
     "notes": "A multi-step workflow: it reads each email in the spam folder and asks AI whether it's genuine spam, moving legitimate mail back to the inbox labeled Not Spam and tagging the rest Confirmed Spam. A second pass scans the inbox for spam that got through and only labels it, so nothing there is moved or deleted."
   },
   {
+    "id": "spam-review",
+    "title": "Weekly spam review",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every Sunday evening, I get a verdict on my Gmail spam folder: which caught emails are actually real and worth moving back, which are just marketing, and which are scams not to click.",
+    "builtWith": [
+      "Google Apps Script",
+      "Claude scheduled tasks",
+      "Gmail"
+    ],
+    "repo": "https://github.com/farooqashar/apps-scripts/tree/main/spam-digest",
+    "schedule": "Weekly",
+    "color": "#7A3E9D",
+    "glyph": "✉",
+    "notes": "Claude's Gmail connector can't see the spam folder, since Gmail hides spam from its API. So a Google Apps Script running inside my account reads spam every Sunday at 6 PM and emails me a digest of it. An hour later, a Claude scheduled task reads that digest and sorts every email into worth moving, marketing or scam, with a one-line reason and a direct link. It's flag-only: nothing gets moved or deleted, and since spam is written by adversaries, the prompt treats the digest as untrusted data."
+  },
+  {
+    "id": "calendar-recap",
+    "title": "Weekly calendar recap",
+    "kind": "Automation",
+    "year": 2026,
+    "summary": "Every Friday, an email that sums up my week on Google Calendar: busy hours, meetings and 1:1s, my busiest day, who I met with most, and a look at next week. Each week also lands as a row in a Sheet so I can see trends.",
+    "builtWith": [
+      "Google Apps Script",
+      "Claude",
+      "Google Calendar",
+      "Google Sheets"
+    ],
+    "repo": "https://github.com/farooqashar/apps-scripts/tree/main/weekly-calendar-recap",
+    "schedule": "Weekly",
+    "color": "#2E86AB",
+    "glyph": "◷",
+    "notes": "A Google Apps Script I wrote with Claude. It runs free on Google's servers on a Friday trigger. It merges overlapping events so busy time isn't double-counted, skips declined invites, counts an event shared across calendars once, and compares each number with the previous week. It's read-only on the calendar; the only things it writes are the email and one Sheet row."
+  },
+  {
     "id": "gmail-labels",
     "title": "Inbox labeling",
     "kind": "Automation",
